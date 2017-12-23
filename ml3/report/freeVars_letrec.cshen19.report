@@ -1,0 +1,58 @@
+
+ml3 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [4 / 4]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 4
+
+Functional_Programming-adts_CPSTransformation_freeVariables-code_ocaml_autograded-letrec/grader program output
+---------------------
+
+
+[1 / 1] freeVarsInExp_sol (LetRecInExp("f","x",AppExp(VarExp "f",VarExp "x"), AppExp(VarExp "f",VarExp "y"))) (correct)
+[1 / 1] freeVarsInExp_sol (LetRecInExp("f","x",AppExp(VarExp "f",VarExp "x"), AppExp(VarExp "f",VarExp "x"))) (correct)
+[1 / 1] freeVarsInExp_sol (LetRecInExp ("f", "x", BinOpAppExp(IntPlusOp, VarExp "x", AppExp(VarExp "f", VarExp "y")), AppExp(VarExp "f", ConstExp(IntConst 0)))) (correct)
+[1 / 1] freeVarsInExp_sol (LetRecInExp ("f", "x", BinOpAppExp(IntPlusOp, VarExp "x", AppExp(VarExp "f", VarExp "y")), AppExp(VarExp "g", ConstExp(IntConst 0)))) (correct)
+
+Total: [4 / 4]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common
+open Plsolution
+(* Leave these line here! *)
+(* Put code for letrec at the bottoem, after removing the raise. *)
+let rec freeVarsInExp exp =
+  match exp
+  with VarExp x -> freeVarsInVarExp x freeVarsInExp
+    | ConstExp c -> freeVarsInConstExp c freeVarsInExp
+    | MonOpAppExp (m,e) -> freeVarsInMonOpAppExp (m,e) freeVarsInExp
+    | BinOpAppExp (b,e1,e2) -> freeVarsInBinOpAppExp (b,e1,e2) freeVarsInExp
+    | IfExp (e1,e2,e3) -> freeVarsInIfExp (e1,e2,e3) freeVarsInExp
+    | AppExp (e1,e2) -> freeVarsInAppExp (e1,e2) freeVarsInExp
+    | FunExp (f,e) -> freeVarsInFunExp (f,e) freeVarsInExp
+    | LetInExp (x,e1,e2) -> freeVarsInLetInExp (x,e1,e2) freeVarsInExp 
+(* Remove the raise and put your code where the raise is now. *) 
+    | LetRecInExp (f,x,e1,e2) -> 
+        let r1 = freeVarsInExp e1 in
+        let e1_f = List.filter (fun a -> if a = f then false else true) r1 in
+        let e1_fx = List.filter (fun a -> if a = x then false else true) e1_f in
+        let r2 = freeVarsInExp e2 in
+        let e2_f = List.filter (fun a -> if a = f then false else true) r2 in
+        e1_fx @ e2_f
+
+Stdout
+----------------------------------------------------
+
+

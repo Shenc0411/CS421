@@ -1,0 +1,57 @@
+
+mp2 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [9 / 9]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 9
+
+Functional_Programming-continuationPassingStyle_CPSTransformToOCaml-code_ocaml_autograded-even_count/grader program output
+---------------------
+
+
+[1 / 1] even_count [1;2;3] (correct)
+[1 / 1] forward_recursion_check file "even_count" (correct)
+[1 / 1] even_countk [1;2;3] string_of_int (correct)
+[0 / 0] even_countk [1;2;3] (fun s -> ()) (correct)
+[0 / 0] even_countk [1;2;3] (fun s -> (idk(s);())) (correct)
+[1 / 1] even_countk [1;2;3] (fun s -> (idk(string_of_int s))) (correct)
+[1 / 1] even_countk [] (fun s -> idk(string_of_int s)) (correct)
+[2 / 2] is_cps_check file "even_countk" (correct)
+[2 / 2] is_cps_of_check file "even_count" "even_countk" (correct)
+
+Total: [9 / 9]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common (* Please leave this. *)
+(* Put code for even_count and even_countk here. *)
+let rec even_count l =
+  match l with [] -> 0
+  | x::xs -> 
+      let result = even_count xs in
+          if (x mod 2) = 0 then result + 1
+          else result;;
+
+let rec even_countk l k =
+  match l with [] -> k 0
+  | x::xs ->
+      even_countk xs (fun t0 ->
+        modk (x, 2) (fun t1 ->
+        eqk (t1, 0) (fun t2 ->
+        if t2 then inck t0 k
+        else k t0)));;
+Stdout
+----------------------------------------------------
+
+

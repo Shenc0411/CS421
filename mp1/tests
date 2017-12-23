@@ -1,0 +1,54 @@
+let rubric_version = "1.0"
+let rubric_title = "CS421 Fall 2016 MP1"
+(**************************************************************************
+ * You can add new test cases by adding new elements to the following lists
+ * Format is:
+ * TEST<X>ARG(<weight>, <function_name>, <arg1>, <arg2>, ..., <argX>)
+ *
+ * <X> is the number of argument that the function being tested takes.
+ **************************************************************************)
+
+
+
+(* This list is for regular problems *)
+let rubric =
+[
+    TEST2ARG(1, closer_to_origin, (2., 0.), (0., -1.));
+
+    TEST2ARG(1, swap_eq, (1., 0.), (0., 1.));
+    TEST2ARG(0, swap_eq, ((), [true]), ([false], ()));
+
+    TEST2ARG(1, two_funs, (not, abs), (true, -5));
+    TEST2ARG(0, two_funs, ((fun () -> "a"), (fun ((), ()) -> [()])), ((), ((), ())));
+
+    TEST2ARG(1, ackermann, 3, 4);
+
+    TEST1ARG(1, collatz, 27);
+
+    TEST1ARG(1, delannoy, (1, 2));
+
+    TEST1ARG(1, product, [2.; 3.; 4.]);
+
+    TEST1ARG(1, double_all, [1.5; -3.0; 0.; 2.2]);
+
+    TEST1ARG(1, upto, 8);
+
+    TEST1ARG(1, upuntil, (fun n -> n * n > 200));
+
+    TEST2ARG(1, pair_with_all, 1, ["a"; "b"; "c"]);
+    TEST2ARG(0, pair_with_all, (), [(); ()]);
+
+
+    TEST3ARG(1, insert_by, (Pervasives.compare), 3, [1; 2; 4]);
+    TEST3ARG(0, insert_by, (fun s t -> 0), (), [()]);
+
+    TEST2ARG(1, sub_list, [1;2;1;1;4;5], [1;2;1;1;1]);
+    TEST2ARG(1, sub_list, [();()], [()]);
+]
+(* Note: the last entry should not be followed by a semicolon. *)
+
+let extra_rubric = 
+[
+    TEST1ARG(1, collect_adjacent, [(1, "a"); (1, "d"); (1, "b"); (0, "b"); (0, "z"); (1, "a"); (1, "z"); (3, "t")]);
+    TEST1ARG(0, collect_adjacent, [((),())])
+]

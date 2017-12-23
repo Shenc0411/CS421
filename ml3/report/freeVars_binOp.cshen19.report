@@ -1,0 +1,50 @@
+
+ml3 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [2 / 2]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 2
+
+Functional_Programming-adts_CPSTransformation_freeVariables-code_ocaml_autograded-binOp/grader program output
+---------------------
+
+
+[1 / 1] freeVarsInExp_sol (BinOpAppExp (CommaOp, VarExp "v", VarExp "dv")) (correct)
+[1 / 1] freeVarsInExp_sol (BinOpAppExp (ConsOp, MonOpAppExp (TlOp, VarExp "v"), MonOpAppExp (TlOp, VarExp "w"))) (correct)
+
+Total: [2 / 2]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common
+open Plsolution
+(* Leave these lines here! *)
+(* Put code for let at the bottom, after removing the raise. *)
+let rec freeVarsInExp exp =
+  match exp
+  with VarExp x -> freeVarsInVarExp x freeVarsInExp
+    | ConstExp c -> freeVarsInConstExp c freeVarsInExp
+    | MonOpAppExp (m,e) -> freeVarsInMonOpAppExp (m,e) freeVarsInExp
+    | IfExp (e1,e2,e3) -> freeVarsInIfExp (e1,e2,e3) freeVarsInExp
+    | AppExp (e1,e2) -> freeVarsInAppExp (e1,e2) freeVarsInExp
+    | FunExp (f,e) -> freeVarsInFunExp (f,e) freeVarsInExp
+    | LetRecInExp (f,x,e1,e2) -> freeVarsInLetRecInExp (f,x,e1,e2) freeVarsInExp
+    | LetInExp (x,e1,e2) -> freeVarsInLetInExp (x,e1,e2) freeVarsInExp 
+(* Remove the raise and put your code where the raise is now. *) 
+    | BinOpAppExp (b,e1,e2) -> (freeVarsInExp e1) @ (freeVarsInExp e2)
+
+Stdout
+----------------------------------------------------
+
+

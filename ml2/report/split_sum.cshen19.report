@@ -1,0 +1,55 @@
+
+ml2 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [16 / 16]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 16
+
+Functional_Programming-recursion_tailRecursion_fold_left-code_ocaml_autograded-split_sum/grader program output
+---------------------
+
+
+[1 / 1] split_sum [-2;0;-1;3] (fun x -> (x mod 2 = 1)) (correct)
+[1 / 1] split_sum [4;2;1] (fun x -> false) (correct)
+[1 / 1] split_sum [2;5;5;6] (fun x -> (x < 4)) (correct)
+[1 / 1] split_sum [] (fun x -> (x = 1)) (correct)
+[4 / 4] tail_recursion_check file "split_sum" (correct)
+[1 / 1] split_sum_sol [1;2;3] (fun x -> (x mod 2 = 1)) (correct)
+[2 / 2] split_sum_sol [4;2;1] (fun x -> true) (correct)
+[2 / 2] split_sum_sol [2;5;5;6] (fun x -> (x<6)) (correct)
+[2 / 2] split_sum_sol [-2;0;1;3] (fun x -> (x mod 3 = 1)) (correct)
+[1 / 1] split_sum_sol [] (fun x -> (x = 1)) (correct)
+
+Total: [16 / 16]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+(* Put code for split_sum, split_sum_start and split_sum_step here. *)
+let rec split_sum l f = 
+    let rec ss l f tacc facc = 
+        match l with [] -> (tacc, facc)
+        | (x::xs) ->
+            if (f x) then ss xs f (tacc + x) facc
+            else ss xs f tacc (facc + x)
+    in ss l f 0 0;;
+    
+let split_sum_start = (0, 0);;
+let split_sum_step r x = 
+    fun a -> let (tacc, facc) = x in
+        if r a then (tacc + a, facc)
+        else (tacc, facc + a);;
+Stdout
+----------------------------------------------------
+
+

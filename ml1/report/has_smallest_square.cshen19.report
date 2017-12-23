@@ -1,0 +1,42 @@
+
+ml1 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [3 / 3]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 3
+
+Functional_Programming-basic_twoArgFunction_conditional-code_ocaml_autograded-has_smallest_square/grader program output
+---------------------
+
+
+[1 / 1] has_smallest_square 4 6 (correct)
+[1 / 1] has_smallest_square 1 (~-1) (correct)
+[1 / 1] has_smallest_square (~-2) (~-1) (correct)
+
+Total: [3 / 3]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+(* Put code for has_smallest_square here. *)
+let has_smallest_square m n =
+    let sqm = m * m in
+    let sqn = n * n in
+    if sqm < sqn then m
+    else if sqm > sqn then n
+    else if m < n then m
+    else n;;
+Stdout
+----------------------------------------------------
+
+

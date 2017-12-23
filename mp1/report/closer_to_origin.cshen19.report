@@ -1,0 +1,44 @@
+
+mp1 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [4 / 4]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 4
+
+Functional_Programming-patternMatching_pair-code_ocaml_autograded-closer_to_origin/grader program output
+---------------------
+
+
+[1 / 1] closer_to_origin (2., 0.) (0., -1.) (correct)
+[1 / 1] closer_to_origin (-1., 0.) (0., 2.) (correct)
+[1 / 1] closer_to_origin (1., 1.) (-1., -1.) (correct)
+[1 / 1] closer_to_origin (0., 0.) (0., 0.) (correct)
+
+Total: [4 / 4]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+(* Put code for closer_to_origin here. *)
+let closer_to_origin p1 p2 =
+    let (x1, y1) = p1 in
+    let (x2, y2) = p2 in
+    let distance1 = x1 *. x1 +. y1 *. y1 in
+    let distance2 = x2 *. x2 +. y2 *. y2 in
+    if distance1 < distance2 then -1
+    else if distance1 = distance2 then 0
+    else 1;;
+Stdout
+----------------------------------------------------
+
+

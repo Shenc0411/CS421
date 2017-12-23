@@ -1,0 +1,230 @@
+
+wa6 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [38 / 38]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 38
+
+Typing_and_Type_Systems-polymorphicTypeDerivations_computation_prooftreeDrawing-gradedOffline-int_if_then_else/grader program output
+---------------------
+
+
+Inference: 
+1. {x : bool, y : int, f : bool -> int} |- x : bool
+
+2. {x : bool, y : int, f : bool -> int} |- (fun x -> x  +  1) y : int
+
+3. {x : bool, y : int, f : bool -> int} |- f x : int
+
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- if x then (fun x -> x  +  1) y else f x : int
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- x : bool
+
+Status: 
+  No errors!
+
+Inference: 
+1. {x : bool, y : int, f : bool -> int} |- fun x -> x  +  1 : int -> int
+
+2. {x : bool, y : int, f : bool -> int} |- y : int
+
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- (fun x -> x  +  1) y : int
+
+Status: 
+  No errors!
+
+Inference: 
+1. {x : int, y : int, f : bool -> int} |- x  +  1 : int
+
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- fun x -> x  +  1 : int -> int
+
+Status: 
+  No errors!
+
+Inference: 
+1. {x : int, y : int, f : bool -> int} |- x : int
+
+2. {x : int, y : int, f : bool -> int} |- 1 : int
+
+---------------------------------------------------------------------------
+  {x : int, y : int, f : bool -> int} |- x  +  1 : int
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : int, y : int, f : bool -> int} |- x : int
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : int, y : int, f : bool -> int} |- 1 : int
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- y : int
+
+Status: 
+  No errors!
+
+Inference: 
+1. {x : bool, y : int, f : bool -> int} |- f : bool -> int
+
+2. {x : bool, y : int, f : bool -> int} |- x : bool
+
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- f x : int
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- f : bool -> int
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- x : bool
+
+Status: 
+  No errors!
+
+Total: [38 / 38]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+{"serializedTree":{"root-l0a":{"left":"{x : bool, y : int, f : bool -> int }","middle":"if x then (fun x -> x + 1) y else f x : int","right":"","label":"If","sideCondition":""},"root-l0a-l1a":{"left":"{x : bool, y : int, f : bool -> int }","middle":"x","right":"bool","label":"Var","sideCondition":""},"root-l0a-l1b":{"left":"{x : bool, y : int, f : bool -> int }","middle":"(fun x -> x + 1) y","right":"int","label":"App","sideCondition":""},"root-l0a-l1b-l2a":{"left":"{x : bool, y : int, f : bool -> int }","middle":"fun x -> x + 1","right":"int -> int","label":"Fun","sideCondition":""},"root-l0a-l1b-l2a-l3a":{"left":"{x : int, y : int, f : bool -> int }","middle":"x + 1","right":"int","label":"BinOp","sideCondition":""},"root-l0a-l1b-l2a-l3a-l4a":{"left":"{x : int, y : int, f : bool -> int }","middle":"x","right":"int","label":"Var","sideCondition":""},"root-l0a-l1b-l2a-l3a-l4b":{"left":"{x : int, y : int, f : bool -> int }","middle":"1","right":"int","label":"Const","sideCondition":""},"root-l0a-l1b-l2b":{"left":"{x : bool, y : int, f : bool -> int }","middle":"y","right":"int","label":"Var","sideCondition":""},"root-l0a-l1c":{"left":"{x : bool, y : int, f : bool -> int }","middle":"f x","right":"int","label":"App","sideCondition":""},"root-l0a-l1c-l2a":{"left":"{x : bool, y : int, f : bool -> int }","middle":"f","right":"bool -> int","label":"Var","sideCondition":""},"root-l0a-l1c-l2b":{"left":"{x : bool, y : int, f : bool -> int }","middle":"x","right":"bool","label":"Var","sideCondition":""}}}
+
+------------------------------------------------------
+open Common
+let tree = [("root-l0a", {str_label = "If"; str_left = "{x : bool, y : int, f : bool -> int}"; str_middle = "if x then (fun x -> x  +  1) y else f x"; str_right = "int"; str_sideCondition = ""}); ("root-l0a-l1a", {str_label = "Var"; str_left = "{x : bool, y : int, f : bool -> int}"; str_middle = "x"; str_right = "bool"; str_sideCondition = ""}); ("root-l0a-l1b", {str_label = "App"; str_left = "{x : bool, y : int, f : bool -> int}"; str_middle = "(fun x -> x  +  1) y"; str_right = "int"; str_sideCondition = ""}); ("root-l0a-l1b-l2a", {str_label = "Fun"; str_left = "{x : bool, y : int, f : bool -> int}"; str_middle = "fun x -> x  +  1"; str_right = "int -> int"; str_sideCondition = ""}); ("root-l0a-l1b-l2a-l3a", {str_label = "BinOp"; str_left = "{x : int, y : int, f : bool -> int}"; str_middle = "x  +  1"; str_right = "int"; str_sideCondition = ""}); ("root-l0a-l1b-l2a-l3a-l4a", {str_label = "Var"; str_left = "{x : int, y : int, f : bool -> int}"; str_middle = "x"; str_right = "int"; str_sideCondition = ""}); ("root-l0a-l1b-l2a-l3a-l4b", {str_label = "Const"; str_left = "{x : int, y : int, f : bool -> int}"; str_middle = "1"; str_right = "int"; str_sideCondition = ""}); ("root-l0a-l1b-l2b", {str_label = "Var"; str_left = "{x : bool, y : int, f : bool -> int}"; str_middle = "y"; str_right = "int"; str_sideCondition = ""}); ("root-l0a-l1c", {str_label = "App"; str_left = "{x : bool, y : int, f : bool -> int}"; str_middle = "f x"; str_right = "int"; str_sideCondition = ""}); ("root-l0a-l1c-l2a", {str_label = "Var"; str_left = "{x : bool, y : int, f : bool -> int}"; str_middle = "f"; str_right = "bool -> int"; str_sideCondition = ""}); ("root-l0a-l1c-l2b", {str_label = "Var"; str_left = "{x : bool, y : int, f : bool -> int}"; str_middle = "x"; str_right = "bool"; str_sideCondition = ""})]
+
+------------------------------------------------------
+
+Stdout
+----------------------------------------------------
+
+Inference: 
+1. {x : bool, y : int, f : bool -> int} |- x : bool
+
+2. {x : bool, y : int, f : bool -> int} |- (fun x -> x  +  1) y : int
+
+3. {x : bool, y : int, f : bool -> int} |- f x : int
+
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- if x then (fun x -> x  +  1) y else f x : int
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- x : bool
+
+Status: 
+  No errors!
+
+Inference: 
+1. {x : bool, y : int, f : bool -> int} |- fun x -> x  +  1 : int -> int
+
+2. {x : bool, y : int, f : bool -> int} |- y : int
+
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- (fun x -> x  +  1) y : int
+
+Status: 
+  No errors!
+
+Inference: 
+1. {x : int, y : int, f : bool -> int} |- x  +  1 : int
+
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- fun x -> x  +  1 : int -> int
+
+Status: 
+  No errors!
+
+Inference: 
+1. {x : int, y : int, f : bool -> int} |- x : int
+
+2. {x : int, y : int, f : bool -> int} |- 1 : int
+
+---------------------------------------------------------------------------
+  {x : int, y : int, f : bool -> int} |- x  +  1 : int
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : int, y : int, f : bool -> int} |- x : int
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : int, y : int, f : bool -> int} |- 1 : int
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- y : int
+
+Status: 
+  No errors!
+
+Inference: 
+1. {x : bool, y : int, f : bool -> int} |- f : bool -> int
+
+2. {x : bool, y : int, f : bool -> int} |- x : bool
+
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- f x : int
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- f : bool -> int
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : bool, y : int, f : bool -> int} |- x : bool
+
+Status: 
+  No errors!
+

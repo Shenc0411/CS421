@@ -1,0 +1,49 @@
+
+ml3 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [4 / 4]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 4
+
+Functional_Programming-adts_PicomlExp_basic-code_ocaml_autograded-count_const_in_exp/grader program output
+---------------------
+
+
+[1 / 1] count_const_in_exp (VarExp "a") (correct)
+[1 / 1] count_const_in_exp (ConstExp (IntConst 5)) (correct)
+[1 / 1] count_const_in_exp (IfExp (BinOpAppExp(EqOp, VarExp "a", ConstExp (StringConst "b")), MonOpAppExp(HdOp, AppExp(VarExp "ww", ConstExp NilConst)), FunExp("x", VarExp "a"))) (correct)
+[1 / 1] count_const_in_exp (LetRecInExp("g","w",VarExp "q", LetInExp("a", ConstExp UnitConst, AppExp(AppExp(VarExp "g", VarExp "a"), VarExp "d")))) (correct)
+
+Total: [4 / 4]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common
+(* Leave the above line there! *)
+(* Put code for count_const_in_exp here, after removing the raise. *)
+let rec count_const_in_exp exp = 
+    match exp with VarExp(v) -> 0
+    | ConstExp(c) -> 1
+    | MonOpAppExp(op, e) -> count_const_in_exp e
+    | BinOpAppExp(op, e1, e2) -> count_const_in_exp e1 + count_const_in_exp e2
+    | IfExp(e1, e2, e3) -> count_const_in_exp e1 + count_const_in_exp e2 + count_const_in_exp e3
+    | AppExp(e1, e2) -> count_const_in_exp e1 + count_const_in_exp e2
+    | FunExp(x, e) -> count_const_in_exp e
+    | LetInExp(x, e1, e2) -> count_const_in_exp e1 + count_const_in_exp e2
+    | LetRecInExp(f, x, e1, e2) -> count_const_in_exp e1 + count_const_in_exp e2
+
+Stdout
+----------------------------------------------------
+
+

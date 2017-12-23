@@ -1,0 +1,199 @@
+
+mp5xc grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [37 / 39]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 37
+
+DynamicSemantics-naturalSemantics_interpreter-code_ocaml_autograded-eval_exp/grader program output
+---------------------
+
+
+[1 / 1] eval_dec (parse s, []) (correct)
+[2 / 2] eval_dec (parse s, []) (correct)
+[2 / 2] eval_dec (parse s, []) (correct)
+[0 / 2] eval_dec (parse s, []) (student solution returns an incorrect value)
+[3 / 3] eval_dec (parse s, []) (correct)
+[2 / 2] eval_dec (parse s, []) (correct)
+[3 / 3] eval_dec (parse s, []) (correct)
+[2 / 2] eval_dec (parse s, []) (correct)
+[3 / 3] eval_dec (parse s, []) (correct)
+[1 / 1] eval_dec (parse s, []) (correct)
+[1 / 1] eval_dec (parse s, []) (correct)
+[3 / 3] eval_dec (parse s, []) (correct)
+[1 / 1] eval_dec (parse s, []) (correct)
+[1 / 1] eval_dec (parse s, []) (correct)
+[1 / 1] eval_dec (parse s, []) (correct)
+[1 / 1] eval_dec (parse s, []) (correct)
+[2 / 2] eval_dec (parse s, []) (correct)
+[2 / 2] eval_dec (parse s, []) (correct)
+[2 / 2] eval_dec (parse s, []) (correct)
+[2 / 2] eval_dec (parse s, []) (correct)
+[2 / 2] eval_dec (parse s, []) (correct)
+
+Total: [37 / 39]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+File "student.ml", line 22, characters 15-49:
+File "student.ml", line 23, characters 15-49:
+File "student.ml", line 24, characters 18-57:
+File "student.ml", line 25, characters 17-70:
+File "student.ml", line 29, characters 21-30:
+File "student.ml", line 29, characters 43-52:
+File "student.ml", line 30, characters 24-33:
+File "student.ml", line 30, characters 46-55:
+File "student.ml", line 31, characters 24-33:
+File "student.ml", line 31, characters 46-55:
+File "student.ml", line 32, characters 22-31:
+File "student.ml", line 32, characters 44-53:
+File "student.ml", line 34, characters 19-28:
+File "student.ml", line 34, characters 41-50:
+File "student.ml", line 35, characters 24-35:
+File "student.ml", line 35, characters 48-59:
+File "student.ml", line 37, characters 26-37:
+File "student.ml", line 37, characters 50-61:
+File "student.ml", line 38, characters 25-36:
+File "student.ml", line 38, characters 49-60:
+File "student.ml", line 39, characters 26-37:
+File "student.ml", line 39, characters 50-61:
+File "student.ml", line 40, characters 20-31:
+File "student.ml", line 40, characters 44-55:
+File "student.ml", line 41, characters 22-34:
+File "student.ml", line 41, characters 47-59:
+File "student.ml", line 42, characters 20-29:
+File "student.ml", line 57, characters 6-140:
+File "student.ml", line 70, characters 4-206:
+File "student.ml", line 80, characters 4-72:
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common;;
+
+let const_to_val c = 
+  match c with
+    IntConst i -> IntVal i
+    | BoolConst b -> BoolVal b
+    | FloatConst f -> FloatVal f
+    | StringConst s -> StringVal s
+    | NilConst -> ListVal []
+    | UnitConst -> UnitVal
+
+let monOpApply op v = 
+  match op with
+    HdOp -> (match v with 
+      ListVal (hd::tl) -> hd
+      | _ -> Exn(0)
+      )
+    | TlOp -> (match v with
+      ListVal (hd::tl) -> ListVal(tl)
+      | _ -> Exn(0)
+      )
+    | FstOp -> (match v with PairVal (a, b) -> a)
+    | SndOp -> (match v with PairVal (a, b) -> b)
+    | IntNegOp -> (match v with  IntVal i -> IntVal (-i))
+    | PrintOp -> (match v with StringVal s -> print_string s; UnitVal)
+
+let binOpApply binop (v1, v2) = 
+  match binop with
+    IntPlusOp -> let IntVal i1 = v1 in let IntVal i2 = v2 in IntVal(i1 + i2)
+    | IntMinusOp -> let IntVal i1 = v1 in let IntVal i2 = v2 in IntVal(i1 - i2)
+    | IntTimesOp -> let IntVal i1 = v1 in let IntVal i2 = v2 in IntVal(i1 * i2)
+    | IntDivOp -> let IntVal i1 = v1 in let IntVal i2 = v2 in 
+      if i2 = 0 then Exn(0) else IntVal(i1 / i2)
+    | ModOp -> let IntVal i1 = v1 in let IntVal i2 = v2 in IntVal(i1 mod i2)
+    | FloatDivOp -> let FloatVal i1 = v1 in let FloatVal i2 = v2 in
+      if i2 = 0.0 then Exn(0) else FloatVal(i1 /. i2)
+    | FloatMinusOp -> let FloatVal i1 = v1 in let FloatVal i2 = v2 in FloatVal(i1 -. i2)
+    | FloatPlusOp -> let FloatVal i1 = v1 in let FloatVal i2 = v2 in FloatVal(i1 +. i2)
+    | FloatTimesOp -> let FloatVal i1 = v1 in let FloatVal i2 = v2 in FloatVal(i1 *. i2)
+    | ExpoOp -> let FloatVal i1 = v1 in let FloatVal i2 = v2 in FloatVal(i1 ** i2)
+    | ConcatOp -> let StringVal s1 = v1 in let StringVal s2 = v2 in StringVal(s1 ^ s2)
+    | ConsOp -> let ListVal l = v2 in ListVal (v1 :: l)
+    | CommaOp -> PairVal(v1, v2)
+    | EqOp -> BoolVal(v1 = v2)
+    | GreaterOp -> BoolVal(v1 > v2)
+
+let rec eval_exp (exp, m) = match exp with
+  ConstExp t -> const_to_val t
+  | VarExp x ->
+    let v = lookup_mem m x in (match v with 
+      RecVarVal(g, y, e, m') -> Closure(y, e, (ins_mem m' g (RecVarVal(g, y, e, m'))))
+      | _ -> v)
+  | MonOpAppExp (op, e) -> monOpApply op (eval_exp (e, m))
+  | BinOpAppExp (op, e1, e2) -> binOpApply op ((eval_exp (e1, m)), (eval_exp (e2, m)))
+  | IfExp (e1, e2, e3) ->
+    let v1 = eval_exp (e1, m) in
+      (match v1 with 
+        Exn _ -> v1
+        | BoolVal true -> eval_exp (e2, m)
+        | BoolVal false -> eval_exp (e3, m)
+      )
+  | LetInExp (x, e1, e2) -> 
+    let v1 = eval_exp (e1, m) in 
+    (match v1 with
+      Exn _ -> v1
+      | _ -> eval_exp (e2, (ins_mem m x v1)))
+  | FunExp (x, e) -> Closure(x, e, m)
+  | AppExp (e1, e2) -> 
+    let v1 = eval_exp (e1, m) in
+    (match v1 with
+      Exn _ -> v1
+      | Closure(x, e', m') -> let v' = eval_exp (e2, m) in 
+      (match v' with
+        Exn _ -> v'
+        | _ -> eval_exp (e', (ins_mem m' x v'))
+      )
+    )
+  | LetRecInExp (f, x, e1, e2) -> eval_exp(e2, (ins_mem m f (RecVarVal(f, x, e1, m))))
+  | RaiseExp e -> let v = eval_exp (e, m) in
+    (match v with 
+      Exn _ -> v
+      | IntVal(n) -> Exn(n)
+    )
+  | TryWithExp (e, intopt1, exp1, match_list) -> 
+    let v = eval_exp(e, m) in
+      (match v with
+        Exn(j) -> 
+          (match intopt1 with None -> v
+          | Some i -> if i = j then eval_exp (exp1, m)
+            else let rec helper l = 
+            (match l with [] -> None
+            | (hd :: tl) -> 
+              (match hd with (None, exp) -> Some(eval_exp (exp, m))
+              | (Some i, exp) -> 
+                if i = j then Some(eval_exp (exp, m))
+                else helper tl
+              )
+            )
+            in match (helper match_list) with None -> Exn(j)
+            | Some v' -> v'
+          )
+          
+        | _ -> v
+      )
+
+let eval_dec (dec, m) = match dec with
+  Anon e -> ((None, eval_exp(e, m)), m)
+  | Let (x, e) -> let v = eval_exp(e, m) in 
+    (match v with
+      Exn _ -> ((None, v), m)
+      | _ -> ((Some x, v), (ins_env m x v))
+    )
+  | LetRec (f, x, e) -> 
+    let rv = RecVarVal(f, x, e, m) in ((Some f, rv), (ins_mem m f rv))
+
+------------------------------------------------------
+
+Stdout
+----------------------------------------------------
+
+

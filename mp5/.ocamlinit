@@ -1,0 +1,6 @@
+#load "common.cmo";;
+#load "picomlparse.cmo";;
+#load "picomllex.cmo";;
+#load "solution.cmo";;
+open Common;;
+#use "mp5.ml";;

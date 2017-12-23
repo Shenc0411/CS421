@@ -1,0 +1,47 @@
+
+mp2 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [7 / 7]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 7
+
+Functional_Programming-continuationPassingStyle_CPSTransformToOCaml-code_ocaml_autograded-list_prod/grader program output
+---------------------
+
+
+[1 / 1] list_prod [1;2;3] (correct)
+[1 / 1] forward_recursion_check file "list_prod" (correct)
+[0 / 0] list_prodk [] (fun s -> ()) (correct)
+[1 / 1] list_prodk [1;2;3] idk (correct)
+[2 / 2] is_cps_check file "list_prodk" (correct)
+[2 / 2] is_cps_of_check file "list_prod" "list_prodk" (correct)
+
+Total: [7 / 7]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common (* Please leave this. *)(* Put code for list_prod and list_prodk here. *)
+let rec list_prod l =
+    match l with [] -> 1
+    | (x::xs) -> x * (list_prod xs);;
+            
+let rec list_prodk l k =
+    match l with [] -> k 1
+    | (x::xs) -> 
+        list_prodk xs (fun t0 ->
+        mulk (x, t0) k);;
+Stdout
+----------------------------------------------------
+
+

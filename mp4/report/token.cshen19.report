@@ -1,0 +1,88 @@
+
+mp4 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [65 / 65]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 65
+
+Lexing_and_Parsing-lexer_picoml-code_ocaml_autograded-token/grader program output
+---------------------
+
+
+[1 / 1] get_all_tokens "let = in + , ; ( - )" (correct)
+[1 / 1] get_all_tokens "42 0 7" (correct)
+[1 / 1] get_all_tokens "0b110100101" (correct)
+[1 / 1] get_all_tokens "0x8844ffaa11" (correct)
+[1 / 1] get_all_tokens "3.14 100.5 1.414" (correct)
+[1 / 1] get_all_tokens "2.7e10" (correct)
+[1 / 1] get_all_tokens "this is where if" (correct)
+[1 / 1] get_all_tokens "this (* is a *) test" (correct)
+[1 / 1] get_all_tokens "this // is a test" (correct)
+[1 / 1] get_all_tokens "this // is a\n test" (correct)
+[1 / 1] try_get_all_tokens "this (* is (* a test *)" (correct)
+[1 / 1] get_all_tokens "~ * / +. -. *. /. ^ " (correct)
+[1 / 1] get_all_tokens " < > <= >= <> | -> ;;" (correct)
+[1 / 1] get_all_tokens ":: @ [] rec and end if then" (correct)
+[1 / 1] get_all_tokens "else fun mod raise try with not && " (correct)
+[1 / 1] get_all_tokens "|| ] [ true false ()  " (correct)
+[1 / 1] get_all_tokens "57 23 197 012983475" (correct)
+[1 / 1] get_all_tokens "0b10100011 0b0 0b111 0b0011 0bbb10100011 0b b111 0b0011b5 0x4a3d2fbc13e  0x12009347645 0xabcdefedcba 0x" (correct)
+[1 / 1] fail_get_all_tokens ".053  530." (correct)
+[1 / 1] get_all_tokens "123.45 00.44 44.00 " (correct)
+[1 / 1] get_all_tokens "123.456e7890 555.e0 0.e001" (correct)
+[3 / 3] get_all_tokens "true false () truefalse (())" (correct)
+[1 / 1] get_all_tokens "this is where if" (correct)
+[1 / 1] get_all_tokens "n_______'" (correct)
+[1 / 1] get_all_tokens "i'm identifying_you" (correct)
+[1 / 1] get_all_tokens "salamthen elsebeGOOD" (correct)
+[1 / 1] get_all_tokens "ifthen truefalse letrec funin" (correct)
+[1 / 1] get_all_tokens "12345s" (correct)
+[1 / 1] fail_get_all_tokens "s12345 S12345" (correct)
+[1 / 1] fail_get_all_tokens "_alam" (correct)
+[1 / 1] fail_get_all_tokens "Salam" (correct)
+[1 / 1] fail_get_all_tokens "'alam" (correct)
+[1 / 1] get_all_tokens "//(* (*TEst*) \n let" (correct)
+[1 / 1] get_all_tokens "(*  \\ let come \n have \n \\ *)" (correct)
+[1 / 1] try_get_all_tokens "this (* is (* a (* so (* so *) test *) *) of nested comments *) for sure" (correct)
+[1 / 1] try_get_all_tokens "this is (* a test *) of unmatched close comment *) maybe" (correct)
+[1 / 1] get_all_tokens "\"some string\"" (correct)
+[1 / 1] get_all_tokens "\" she said, \\\"hello\\\"\"" (correct)
+[1 / 1] get_all_tokens "\"a line \\n starts here; indent \\t starts here next string\" \"starts here\"" (correct)
+[1 / 1] get_all_tokens "\"Hello, \\n \\ world! \"" (correct)
+[1 / 1] get_all_tokens "\" \\100 \\001 \"" (correct)
+[2 / 2] get_all_tokens "\" \\171 \\249 \"" (correct)
+[1 / 1] fail_get_all_tokens "\" \\281 \"" (correct)
+[1 / 1] fail_get_all_tokens "\" \\999 \"" (correct)
+[1 / 1] get_all_tokens "\" \\1039 \\2504503 \"" (correct)
+[1 / 1] fail_get_all_tokens "\" \\ \n \t \\ \"" (correct)
+[1 / 1] get_all_tokens "then hi \"by \\\n  \t  \\t well?\"" (correct)
+[2 / 2] fail_get_all_tokens "\"\"\"" (correct)
+[2 / 2] get_all_tokens " \"some\" , \"salam\" " (correct)
+[1 / 1] fail_get_all_tokens " \"\\6\" " (correct)
+[1 / 1] fail_get_all_tokens " \"\\x26\" " (correct)
+[1 / 1] get_all_tokens "\"1111111111111111111\"           " (correct)
+[2 / 2] get_all_tokens "\" (*Hello*)\" " (correct)
+[2 / 2] get_all_tokens "\" // \" " (correct)
+[2 / 2] get_all_tokens "\" if let\"  if let " (correct)
+[2 / 2] get_all_tokens "\"\"           " (correct)
+
+Total: [65 / 65]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+
+Stdout
+----------------------------------------------------
+
+

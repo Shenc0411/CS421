@@ -1,0 +1,213 @@
+let rubric_version = "1.0"
+let rubric_title = "CS421 Fall 2017 Patterns of Recursion, Higher-order Functions"
+(**************************************************************************
+ * You can add new test cases by adding new elements to the following lists
+ * Format is:
+ * TEST<X>ARG(<weight>, <function_name>, <arg1>, <arg2>, ..., <argX>)
+ *
+ * <X> is the number of argument that the function being tested takes.
+ **************************************************************************)
+
+let file = "student.ml"
+
+let even_count_fr_stu l = List.fold_right Student.even_count_fr_rec l Student.even_count_fr_base
+let even_count_fr_sol l = List.fold_right Solution.even_count_fr_rec l Solution.even_count_fr_base
+
+let pair_sums_map_arg_stu l = List.map Student.pair_sums_map_arg l
+let pair_sums_map_arg_sol l = List.map Solution.pair_sums_map_arg l
+
+let remove_even_stu l = List.fold_right Student.remove_even_rec l Student.remove_even_base
+let remove_even_sol l = List.fold_right Solution.remove_even_rec l Solution.remove_even_base
+
+let sift_stu f lst = List.fold_right (Student.sift_rec f) lst Student.sift_base
+let sift_sol f lst = List.fold_right (Solution.sift_rec f) lst Solution.sift_base
+
+let even_count_tr_stu l = List.fold_left Student.even_count_tr_step Student.even_count_tr_start l
+let even_count_tr_sol l = List.fold_left Solution.even_count_tr_step Solution.even_count_tr_start l
+
+let count_element_stu l m = List.fold_left (Student.count_element_step m) Student.count_element_start l
+let count_element_sol l m = List.fold_left (Solution.count_element_step m) Solution.count_element_start l
+
+let split_sum_stu l f = List.fold_left (Student.split_sum_step f) Student.split_sum_start l
+let split_sum_sol l f = List.fold_left (Solution.split_sum_step f) Solution.split_sum_start l
+
+let all_nonneg_stu l = List.fold_left Student.all_nonneg_step Student.all_nonneg_start l
+let all_nonneg_sol l = List.fold_left Solution.all_nonneg_step Solution.all_nonneg_start l
+
+let exists_between_stu m n l = List.fold_left (Student.exists_between_step m n) Student.exists_between_start l
+let exists_between_sol m n l = List.fold_left (Solution.exists_between_step m n) Solution.exists_between_start l
+
+let rev_append_stu l = List.fold_right Student.rev_append_rec l Student.rev_append_base
+let rev_append_sol l = List.fold_right Solution.rev_append_rec l Solution.rev_append_base
+
+open Check_recursion
+let app_all_with_form_check  = fun _ -> true
+let forward_recursion_check = fun _ -> fun _ -> true
+let tail_recursion_check = fun _ -> fun _ -> true
+let check_form_app_all_with file =
+    let (is_fwd, is_tl, lib_deps) = List.assoc "app_all_with" (classify_decs (decs_from_file file) [])
+    in is_fwd && is_tl && (List.for_all (fun d -> d = "List.map") lib_deps)
+
+(* This list is for regular problems *)
+let rubric =
+[
+    (* Problem 1 *)
+    TEST1ARG(1, even_count_fr, [-2]);
+    TEST1ARG(1, even_count_fr, [-2;-1;0;2]);
+    TEST1ARG(1, even_count_fr, [-1;-3;-5]);
+    TEST1ARG(0, even_count_fr, []);
+    TEST2ARG_TWOFUN(3, forward_recursion_check, check_forward_recursive_no_libs, file, "even_count_fr"); 
+
+    (* Problem 2 *)
+    TEST1ARG(1, pair_sums, [(1,6);(3,1);(3,2)]);
+    TEST1ARG(1, pair_sums, []);
+    TEST1ARG(1, pair_sums, [(-1,6)]);
+    TEST2ARG_TWOFUN(3, forward_recursion_check, check_forward_recursive_no_libs, file, "pair_sums");
+    
+    (* Problem 3 *)
+    TEST1ARG(1, remove_even,  [1; 4; 3; 7; 2; 8]) ;
+    TEST1ARG(1, remove_even,  [7; 3; 5; 9]);
+    TEST1ARG(1, remove_even,  [2; 4; 6; 8]);
+    TEST2ARG_TWOFUN(3, forward_recursion_check, check_forward_recursive_no_libs, file, "remove_even");
+
+    (* Problem 4 *)
+    TEST2ARG(1, sift, (fun x -> x mod 2 = 0), [-3; 5; 2; -6]) ;
+    TEST2ARG(1, sift, (fun x -> x > "a"), [""; "aa"; "a"; "1"; "::"]);
+    TEST2ARG(1, sift, (fun x -> true), [()]);
+    TEST2ARG_TWOFUN(3, forward_recursion_check, check_forward_recursive_no_libs, file, "sift");
+    
+    (* Problem 5 *)
+    TEST3ARG(1, apply_even_odd, [1;2;3], (fun x -> x + 1), (fun x -> x - 1));
+    TEST3ARG(1, apply_even_odd, [(1, 1);(15, 7)], (fun (x, y) -> x + y), (fun (x, y) -> x - y));
+    TEST3ARG(1, apply_even_odd, ["cat"], (fun x -> x ^ "dog"), (fun x -> "yoyo"));
+    TEST3ARG(1, apply_even_odd, [1.2; 3.4; 5.6; 7.8; 9.0], (fun x -> x +. 1.2), (fun x -> x /. 3.0));
+    TEST3ARG(1, apply_even_odd, [1; 3; -2; -4; 5; -6], (fun x -> x > 0), (fun x -> x < 0));
+    TEST2ARG_TWOFUN(5, forward_recursion_check, check_forward_recursive_no_libs, file, "apply_even_odd");
+
+    (* Problem 6*)
+    	TEST1ARG(1, rle, [1;2;2;3;3;3]);
+	TEST1ARG(1, rle, [124]);
+	TEST1ARG(1, rle, ["hi";"hi";"hi";"hi";"everyone"]);
+	TEST1ARG(1, rle, [1;3;5;1]);
+	TEST1ARG(1, rle, [4.0;0.0;0.0]);
+    TEST2ARG_TWOFUN(3, forward_recursion_check, check_forward_recursive_no_libs, file, "rle");
+
+    (* Problem 7*)
+    TEST1ARG(1, even_count_tr, [-2]);
+    TEST1ARG(1, even_count_tr, [-2;-1;0;2]);
+    TEST1ARG(1, even_count_tr, [-1;-3;-5]);
+    TEST1ARG(1, even_count_tr, []);
+    TEST2ARG_TWOFUN(4, tail_recursion_check, check_tail_recursive_no_libs, file, "even_count_tr");
+
+    (* Problem 8 *)
+    TEST2ARG(1, count_element, [0;1;2;4;2;5;4;2], 2);
+    TEST2ARG(1, count_element, [0;1;5], 2);
+    TEST2ARG(1, count_element, [], 2);
+    TEST2ARG(1, count_element, ['d';'7';'4';'7';'e';'f'], 'e');
+    TEST2ARG(1, count_element, [5;4;-2], -2);
+    TEST2ARG(1, count_element, [()], ());
+    TEST2ARG_TWOFUN(6, tail_recursion_check, check_tail_recursive_no_libs, file, "count_element");
+
+    (* Problem 9 *)
+     TEST1ARG(1, all_nonneg, [4; 7; -3; 5]);
+     TEST1ARG(1, all_nonneg, []);
+     TEST1ARG(1, all_nonneg, [4; 7; 5]);
+    TEST2ARG_TWOFUN(3, tail_recursion_check, check_tail_recursive_no_libs, file, "all_nonneg");
+
+    (* Problem 10 *)
+    	TEST2ARG(1, split_sum, [-2;0;-1;3], (fun x -> (x mod 2 = 1)));
+	TEST2ARG(1, split_sum, [4;2;1], (fun x -> false));
+	TEST2ARG(1, split_sum, [2;5;5;6], (fun x -> (x < 4)));
+	TEST2ARG(1, split_sum, [], (fun x -> (x = 1)));
+    TEST2ARG_TWOFUN(4, tail_recursion_check, check_tail_recursive_no_libs, file, "split_sum");
+
+    (* Problem 11 *)
+    	TEST1ARG(1, max_index, [1;2;3;4]);
+	TEST1ARG(1, max_index, [-1;-5;-3;-1;-4]);
+	TEST1ARG(1, max_index, ["asd";"zxc";"rty";"zxc";"zxc"]);
+	TEST1ARG(1, max_index, [-5.0]);
+	TEST1ARG(1, max_index, [();();();()]);
+    TEST2ARG_TWOFUN(5, tail_recursion_check, check_tail_recursive_no_libs, file, "max_index");
+
+    (* Problem 12 *)
+    TEST2ARG(1, concat, "   ", []);
+    TEST2ARG(1, concat, "   ", ["UIUC"]);
+    TEST2ARG(1, concat, " ", ["I";"love";"UIUC";"football";"team";"if";"and";"only";"if";"they";"can";"get";"success";"in";"the";"NCAA";"championship"]);
+    TEST2ARG(1, concat, ", and the other string is ", ["1";"100";"111";"123";"345";"567";"";"666";"\n";"\t";" ";"33";"555";"65432";"4444";"4\n4";"666";""]);
+    TEST2ARG(1, concat, "", ["1";"100";"111";"123";"345";"567";"";"666";"\n";"\t";" ";"33";"555";"65432";"4444";"4\n4";"666";""]);
+    TEST2ARG_TWOFUN(5, tail_recursion_check, check_tail_recursive_no_libs, file, "concat");
+
+    (* Problem 13 *)
+    TEST1ARG_TWOFUN(1, even_count_fr_sol, even_count_fr_stu, [-2]);
+    TEST1ARG_TWOFUN(1, even_count_fr_sol, even_count_fr_stu, [-2;-1;0;2]);
+    TEST1ARG_TWOFUN(1, even_count_fr_sol, even_count_fr_stu, [-1;-3;-5]);
+    TEST1ARG_TWOFUN(1, even_count_fr_sol, even_count_fr_stu, []);
+
+    (* Problem 14 *)
+    TEST1ARG_TWOFUN(1, pair_sums_map_arg_sol, pair_sums_map_arg_stu, [(1,6);(3,1);(3,2)]);
+    TEST1ARG_TWOFUN(1, pair_sums_map_arg_sol, pair_sums_map_arg_stu, []);
+    TEST1ARG_TWOFUN(1, pair_sums_map_arg_sol, pair_sums_map_arg_stu, [(-1,6)]);
+
+    (* Problem 15 *)
+    TEST1ARG_TWOFUN(1, remove_even_sol, remove_even_stu,  [1; 4; 3; 7; 2; 8]) ;
+    TEST1ARG_TWOFUN(1, remove_even_sol, remove_even_stu,  [7; 3; 5; 9]);
+    TEST1ARG_TWOFUN(1, remove_even_sol, remove_even_stu,  [2; 4; 6; 8]);
+
+
+(* Problem 16 *)
+    TEST2ARG_TWOFUN(0, sift_sol, sift_stu, (fun x -> x mod 2 = 0), [-3; 5; 2; -6]) ;
+    TEST2ARG_TWOFUN(1, sift_sol, sift_stu, (fun x -> x > "a"), [""; "aa"; "a"; "1"; "::"]);
+    TEST2ARG_TWOFUN(1, sift_sol, sift_stu, (fun x -> true), [()]);
+    
+    (* Problem 17 *)
+    TEST1ARG_TWOFUN(1, even_count_tr_sol, even_count_tr_stu, [-2]);
+    TEST1ARG_TWOFUN(1, even_count_tr_sol, even_count_tr_stu, [-2;-1;0;2]);
+    TEST1ARG_TWOFUN(1, even_count_tr_sol, even_count_tr_stu, [-1;-3;-5]);
+    TEST1ARG_TWOFUN(1, even_count_tr_sol, even_count_tr_stu, []);
+
+    (* Problem 18 *)
+    TEST2ARG_TWOFUN(1, count_element_sol, count_element_stu, [0;1;2;4;2;5;4;2], 2);
+    TEST2ARG_TWOFUN(1, count_element_sol, count_element_stu, [0;1;5], 2);
+    TEST2ARG_TWOFUN(1, count_element_sol, count_element_stu, [], 2);
+    TEST2ARG_TWOFUN(1, count_element_sol, count_element_stu, ['d';'7';'4';'7';'e';'f'], 'e');
+    TEST2ARG_TWOFUN(1, count_element_sol, count_element_stu, [5;4;-2], -2);
+    TEST2ARG_TWOFUN(1, count_element_sol, count_element_stu, [()], ());
+
+    (* Problem 19 *)
+     TEST1ARG_TWOFUN(1, all_nonneg_sol, all_nonneg_stu, [4; 7; -3; 5]);
+     TEST1ARG_TWOFUN(1, all_nonneg_sol, all_nonneg_stu, []);
+     TEST1ARG_TWOFUN(1, all_nonneg_sol, all_nonneg_stu, [4; 7; 5]);
+
+    (* Problem 20 *)
+	TEST2ARG_TWOFUN(1, split_sum_sol, split_sum_stu, [1;2;3], (fun x -> (x mod 2 = 1)));
+	TEST2ARG_TWOFUN(1, split_sum_sol, split_sum_stu, [4;2;1], (fun x -> true));
+	TEST2ARG_TWOFUN(1, split_sum_sol, split_sum_stu, [2;5;5;6], (fun x -> (x<6)));
+	TEST2ARG_TWOFUN(1, split_sum_sol, split_sum_stu, [-2;0;1;3], (fun x -> (x mod 3 = 1)));
+	TEST2ARG_TWOFUN(1, split_sum_sol, split_sum_stu, [], (fun x -> (x = 1)));
+	
+    (* Problem 21 *)
+    TEST3ARG(1, app_all_with, [], 0, []);
+    TEST3ARG(1, app_all_with, [(fun x y -> x+y); (fun x y -> x*y)], 47, [1;2;3]);
+    TEST3ARG(1, app_all_with, [(fun x y -> (x,y)); (fun x y -> (x*.2.0, y))], 3.14, ["hello"; "there"; "hi"]);
+    TEST3ARG(1, app_all_with, [(fun x y -> x > y); (fun x y -> y mod x = 0); (fun x y -> x < y)], 6, [0;6;10;12;20;24]);
+    TEST3ARG(1, app_all_with, [(fun x y -> (x+y)>(x*y))], 6, [0;6;1;2;5;9]);
+    TEST1ARG_TWOFUN(5, app_all_with_form_check, check_form_app_all_with, file);
+    
+    (* Problem 22 *)
+    TEST3ARG_TWOFUN(1, exists_between_sol, exists_between_stu, 1, 10, [0; 15; 5; 11]);
+    TEST3ARG_TWOFUN(1, exists_between_sol, exists_between_stu, 1, 10, [0; 15; 1; 11]);
+    TEST3ARG_TWOFUN(1, exists_between_sol, exists_between_stu, 1, 10, [0; 15; 10; 11]);
+    TEST3ARG_TWOFUN(1, exists_between_sol, exists_between_stu, -6, 6, [-1; 20; 8; -7]);
+    TEST3ARG_TWOFUN(1, exists_between_sol, exists_between_stu, -12, -6, [-1; 20; 8; -7]);
+    TEST3ARG_TWOFUN(1, exists_between_sol, exists_between_stu, (), (), [()])
+
+]
+(* Note: the last entry should not be followed by a semicolon. *)
+
+let extra_rubric = [
+    TEST2ARG_TWOFUN(1, rev_append_sol, rev_append_stu, [1; 6; 9], [7; 2]);
+    TEST2ARG_TWOFUN(1, rev_append_sol, rev_append_stu, [], []);
+    TEST2ARG_TWOFUN(1, rev_append_sol, rev_append_stu, ["a"; "b"], ["d"]);
+    TEST2ARG_TWOFUN(1, rev_append_sol, rev_append_stu, [()], [()]);
+    TEST2ARG_TWOFUN(1, rev_append_sol, rev_append_stu, [1; 4], [2])        
+]

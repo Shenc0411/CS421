@@ -1,0 +1,98 @@
+
+ml4 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [42 / 42]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 42
+
+Typing_and_Type_Systems-unification-code_ocaml_autograded-unify_eliminate/grader program output
+---------------------
+
+
+[1 / 1] unify [(TyVar 0, TyConst("int" , []))] (correct)
+[1 / 1] unify [(TyVar 0, TyVar 1)] (correct)
+[1 / 1] unify [(TyVar 0, TyConst("int" , [])); (TyVar 1, TyConst("list", []))] (correct)
+[1 / 1] unify [(TyVar 0, TyVar 1); (TyVar 2, TyVar 1)] (correct)
+[1 / 1] unify [(TyVar 1, TyConst("int" , [TyVar 5; TyConst("option", [TyVar 6])])); (TyVar 2, TyConst( "int", [TyVar 6; TyVar 7])); (TyVar 3, TyConst("list", [TyVar 7])); (TyVar 4, TyConst("int" , []))] (correct)
+[1 / 1] unify [(TyVar 0, TyVar 1); (TyVar 2, TyVar 0)] (correct)
+[1 / 1] unify [(TyVar 0, TyVar 1); (TyConst("int" , []), TyVar 0)] (correct)
+[2 / 2] unify [(TyVar 4, TyConst("int", [])); (TyVar 3, TyConst("list", [TyVar 4])); (TyVar 2, TyConst( "int" , [TyVar 3; TyVar 4])); (TyVar 1, TyConst( "int" , [TyVar 2; TyConst("option", [TyVar 3])]))] (correct)
+[1 / 1] unify [(TyVar 2, TyVar 0); (TyVar 0, TyVar 1)] (correct)
+[1 / 1] unify [(TyConst("int" , []), TyVar 0); (TyVar 0, TyVar 1)] (correct)
+[2 / 2] unify [(TyVar 1, TyConst("int" , [TyVar 2; TyConst("option", [TyVar 3])])); (TyVar 2, TyConst("int" , [TyVar 3; TyVar 4])); (TyVar 3, TyConst("list", [TyVar 4])); (TyVar 4, TyConst("int" , []))] (correct)
+[3 / 3] unify [(TyVar 1, TyConst( "int", [(TyConst("int", [])); TyConst("option", [TyVar 4]); TyVar 6])); (TyVar 2, TyConst("int", [TyVar 7; TyVar 1; TyVar 4])); (TyVar 3, TyConst("list", [TyVar 1; TyConst("->", [TyVar 2; (TyConst("int", []))])])); (TyVar 4, TyConst("->", [(TyConst("int", [])); (TyConst("bool", []))]))] (correct)
+[3 / 3] unify [(TyVar 1, TyVar 2); (TyVar 2, TyVar 3); (TyVar 3, TyConst("int", [])); (TyVar 3, TyVar 1)] (correct)
+[1 / 1] unify [(TyConst("int", [TyVar 1; TyVar 2]), TyConst("int", [TyConst("bool", []); TyConst( "int", [])]))] (correct)
+[2 / 2] unify [(TyVar 0, TyConst("list", [TyConst ("int", [])])); (TyConst ("->", [TyVar 0; TyVar 0]), TyConst ("->", [TyVar 0; TyVar 1]))] (correct)
+[3 / 3] unify [(TyConst("int", [TyConst("string", [TyVar 3]); TyConst( "option", [TyConst("int", [TyConst("string", [TyVar 4]); TyVar 1; TyConst("string", [ TyConst("*", [TyVar 3; TyVar 4])])])])]), TyConst("int", [TyVar 1; TyConst("option", [TyVar 2])])); (TyConst("string", [TyVar 3]), TyConst("string", [TyConst("bool", [])])); (TyConst("*", [TyConst("bool", []); TyVar 1]), TyVar 4) ] (correct)
+[2 / 2] unify [(TyConst("list", [TyVar 1]), TyConst("list", [TyConst("->", [TyVar 2; TyVar 3])])); (TyVar 1, TyConst("->", [TyVar 2; TyVar 3]))] (correct)
+[2 / 2] unify [(TyVar 1, TyConst("->", [TyVar 2; TyVar 3])); (TyConst("list", [TyVar 1]), TyConst("list", [TyConst("->", [TyVar 2; TyVar 3])]))] (correct)
+[2 / 2] unify [(TyConst("option", [TyConst("->", [TyVar 2; TyVar 3])]), TyConst("option", [TyVar 1])); (TyConst("list", [TyVar 1]), TyConst("list", [TyConst("->", [TyConst("int", []); TyVar 2])])); (TyVar 1, TyConst("->", [TyVar 3; TyVar 2])) ] (correct)
+[2 / 2] unify [(TyVar 1, TyConst("string", [TyVar 0; TyVar 1]))] (correct)
+[1 / 1] unify [(TyVar 0, TyConst("int" , [])); (TyConst("int", []), TyConst("bool", []))] (correct)
+[3 / 3] unify [(TyVar 0, TyConst("int" , [])); (TyVar 0, TyConst("bool", []))] (correct)
+[1 / 1] unify [(TyVar 1, TyConst("->", [TyVar 1; TyConst("option", [TyVar 2])])); (TyConst("list", [TyVar 2]), TyVar 1)] (correct)
+[2 / 2] unify [(TyConst("option", [TyConst("->", [TyVar 2; TyVar 3])]), TyConst("option", [TyVar 1])); (TyConst("list", [TyVar 1]), TyConst("list", [TyConst("->", [TyConst("int", []); TyVar 2])])); (TyVar 1, TyConst("->", [TyVar 3; TyVar 2])); (TyConst("int", []), TyConst("bool", [])) ] (correct)
+[2 / 2] unify [(TyConst("option", [TyConst("->", [TyVar 2; TyVar 3])]), TyConst("option", [TyVar 1])); (TyConst("list", [TyVar 1]), TyConst("list", [TyConst("->", [TyConst("int", []); TyVar 2])])); (TyVar 1, TyConst("->", [TyConst("bool", []); TyVar 2])) ] (correct)
+
+Total: [42 / 42]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common
+open Plsolution;;
+(* Leave these lines here! *)
+(* Put any helper functions you want to write and use in this space. *)
+  
+  
+  
+(* Put code for eliminate at the bottom, after removing the raise. *)
+let rec unify constraints =
+  match constraints with
+    [] -> Some([])
+  | (s,t)::rem_constraints ->
+    (* Delete *)
+    if s = t then unify rem_constraints
+    else
+      (match s
+       with TyConst(c,args) ->
+         unify_orient_or_decompose c args t rem_constraints unify
+         | TyVar n -> (* Eliminate *)
+           if occurs n t then None
+           else 
+               let sub = [(n, t)] in
+               let rec helper l =
+                   match l with [] -> []
+                   | ((a, b) :: tl) -> (monoTy_lift_subst sub a, monoTy_lift_subst sub b) :: (helper tl)
+                in let result = unify (helper rem_constraints) in
+                match result with None -> None
+                | Some(phi) -> Some((n, monoTy_lift_subst phi t) :: phi)
+            
+
+
+
+
+  (* Your code here *)
+
+
+
+
+
+  )
+
+
+Stdout
+----------------------------------------------------
+
+

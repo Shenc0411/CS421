@@ -1,0 +1,45 @@
+
+mp2 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [5 / 5]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 5
+
+Functional_Programming-continuations_basic-code_ocaml_autograded-three_freeze/grader program output
+---------------------
+
+
+[1 / 1] three_freezek ("muda", "plop") (fun s -> (s, String.length s)) (correct)
+[0 / 0] three_freezek ("muda", "plop") (fun s ->(grab_trace (s);())) (correct)
+[1 / 1] three_freezek ("plop", "muda") grab_trace (correct)
+[1 / 1] three_freezek ("splat", "split") (fun s -> s) (correct)
+[2 / 2] is_cps_check file "three_freezek" (correct)
+
+Total: [5 / 5]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common (* Please leave this. *)
+(* Put code for three_freezek here. *)
+
+let three_freezek (s, p) k = 
+    concatk (s, p) (fun t0 ->
+    concatk (t0, t0) (fun t1 ->
+    concatk (t1, t0) (fun t2 ->
+    k t2
+    )));;
+Stdout
+----------------------------------------------------
+
+

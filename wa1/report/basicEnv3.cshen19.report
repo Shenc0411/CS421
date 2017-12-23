@@ -1,0 +1,145 @@
+
+wa1 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [16 / 16]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 16
+
+Functional_Programming-basicEnvironments_ocaml-computation_interactive_autograded-basicEnv3/grader program output
+---------------------
+
+
+
+Welcome to the Picoml Evaluation Environment Tester 
+
+In the following, you will be given a series of declaration together with 
+the output OCaml would print.  After each declaration, you are asked to type 
+in the environment in effect after all the declarations up to that point have 
+been executed.
+
+Please enter environments using the following syntax. The environment is a
+possibly empty sequence of comma separated bindings surrounded by curly braces,
+{  }. A binding is given by an identifier followed by -> followed by its value.
+The particular value of a closure is written with a starting < followed by the
+formal parameter of the closure followed by -> followed by the body of the
+closure, followed by a comma, followed by a closing >. As an example, the
+environment that maps a to 2 and b to 17 is written { a -> 2, b -> 17} and the
+closure for fun x -> x + a + b is written < x -> x + a + b, { a -> 2, b -> 17} >.
+
+2 + 5;;
+Your answer was: {}
+That is correct!
+
+let x = 6;;
+Your answer was: {x -> 6}
+That is correct!
+
+let y = x * 2;;
+Your answer was: {x -> 6, y -> 12}
+That is correct!
+
+let z = 
+  let y = x + 2 
+  in [y;x];;
+Your answer was: {x -> 6, y -> 12, z -> [8; 6]}
+That is correct!
+
+let w = x + y 
+  in 2 + w;;
+Your answer was: {x -> 6, y -> 12, z -> [8; 6]}
+That is correct!
+
+let g y = y + x;;
+Your answer was: {g -> <y -> y  +  x, {x -> 6, y -> 12, z -> [8; 6]}>, x -> 12, y -> 12, z -> [8; 6]}
+That is incorrect! (2 attemps remaining)
+
+let g y = y + x;;
+Your answer was: {g -> <y -> y  +  x, {x -> 6, y -> 12, z -> [8; 6]}>, x -> 6, y -> 12, z -> [8; 6]}
+That is correct!
+
+let x = g x;;
+Your answer was: {g -> <y -> y  +  x, {x -> 6, y -> 12, z -> [8; 6]}>, x -> 12, y -> 12, z -> [8; 6]}
+That is correct!
+
+let p x y = (x,y);;
+Your answer was: {g -> <y -> y  +  x, {x -> 6, y -> 12, z -> [8; 6]}>, p -> <x -> fun y -> (x , y), {g -> <y -> y  +  x, {x -> 6, y -> 12, z -> [8; 6]}>, x -> 12, y -> 12, z -> [8; 6]}>, x -> 12, y -> 12, z -> [8; 6]}
+That is correct!
+You have completed the assignment.  Your score is 16
+
+
+Total: [16 / 16]
+
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+type input = {ans: string; prompt: string; num: int}
+type student_inputs = {inputHistory: input list}
+
+let student_inputs = 
+{ inputHistory = [ { num  = 0; prompt  = "2 + 5;;"; ans  = "{}"};{ num  = 1; prompt  = "let x = 6;;"; ans  = "{x -> 6}"};{ num  = 2; prompt  = "let y = x * 2;;"; ans  = "{x -> 6, y -> 12}"};{ num  = 3; prompt  = "let z = \n  let y = x + 2 \n  in [y;x];;"; ans  = "{x -> 6, y -> 12, z -> [8;6]}"};{ num  = 4; prompt  = "let w = x + y \n  in 2 + w;;"; ans  = "{x -> 6, y -> 12, z -> [8;6]}"};{ num  = 5; prompt  = "let g y = y + x;;"; ans  = "{x -> 12, y -> 12, z -> [8;6], g -> < y -> y + x, {x -> 6, y -> 12, z -> [8;6]} >}"};{ num  = 5; prompt  = "let g y = y + x;;"; ans  = "{x -> 6, y -> 12, z -> [8;6], g -> < y -> y + x, {x -> 6, y -> 12, z -> [8;6]} >}"};{ num  = 6; prompt  = "let x = g x;;"; ans  = "{x -> 12, y -> 12, z -> [8;6], g -> < y -> y + x, {x -> 6, y -> 12, z -> [8;6]} >}"};{ num  = 7; prompt  = "let p x y = (x,y);;"; ans  = "{x -> 12, y -> 12, z -> [8;6], g -> < y -> y + x, {x -> 6, y -> 12, z -> [8;6]} >, \np -> < x -> fun y -> (x, y), {x -> 12, y -> 12, z -> [8;6], g -> < y -> y + x, {x -> 6, y -> 12, z -> [8;6]} >}>}"}]}
+
+Stdout
+----------------------------------------------------
+
+
+Welcome to the Picoml Evaluation Environment Tester 
+
+In the following, you will be given a series of declaration together with 
+the output OCaml would print.  After each declaration, you are asked to type 
+in the environment in effect after all the declarations up to that point have 
+been executed.
+
+Please enter environments using the following syntax. The environment is a
+possibly empty sequence of comma separated bindings surrounded by curly braces,
+{  }. A binding is given by an identifier followed by -> followed by its value.
+The particular value of a closure is written with a starting < followed by the
+formal parameter of the closure followed by -> followed by the body of the
+closure, followed by a comma, followed by a closing >. As an example, the
+environment that maps a to 2 and b to 17 is written { a -> 2, b -> 17} and the
+closure for fun x -> x + a + b is written < x -> x + a + b, { a -> 2, b -> 17} >.
+
+2 + 5;;
+Your answer was: {}
+That is correct!
+
+let x = 6;;
+Your answer was: {x -> 6}
+That is correct!
+
+let y = x * 2;;
+Your answer was: {x -> 6, y -> 12}
+That is correct!
+
+let z = 
+  let y = x + 2 
+That is correct!
+
+let w = x + y 
+  in 2 + w;;
+That is correct!
+
+let g y = y + x;;
+That is incorrect! (2 attemps remaining)
+
+let g y = y + x;;
+That is correct!
+
+let x = g x;;
+That is correct!
+
+let p x y = (x,y);;
+That is correct!
+You have completed the assignment.  Your score is 16
+
+
+

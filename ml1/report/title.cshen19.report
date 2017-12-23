@@ -1,0 +1,34 @@
+
+ml1 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [1 / 1]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 1
+
+Functional_Programming-basic_variable_declaration-code_ocaml_autograded-title/grader program output
+---------------------
+
+
+[1 / 1] title (correct)
+
+Total: [1 / 1]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+(* Put code for title here. *)
+let title = "ML 1 -- Basic OCaml";;
+Stdout
+----------------------------------------------------
+
+

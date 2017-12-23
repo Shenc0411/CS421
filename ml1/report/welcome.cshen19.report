@@ -1,0 +1,51 @@
+
+ml1 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [3 / 3]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 3
+
+Functional_Programming-basic_function_conditional_string_printing-code_ocaml_autograded-welcome/grader program output
+---------------------
+
+
+Aw, come on, John. We're going to have a wonderful time!
+Aw, come on, John. We're going to have a wonderful time!
+[1 / 1] welcome "John" (correct)
+Can you come out to play?
+Can you come out to play?
+[1 / 1] welcome "Elsa" (correct)
+Aw, come on, . We're going to have a wonderful time!
+Aw, come on, . We're going to have a wonderful time!
+[1 / 1] welcome "" (correct)
+
+Total: [3 / 3]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common (* Leave this line here! *)
+(* Put code for welcome below here. *)
+let welcome name =
+    if name = "Elsa" then print_string "Can you come out to play?\n"
+    else print_string ("Aw, come on, " ^ name ^ ". We're going to have a wonderful time!\n");;
+Stdout
+----------------------------------------------------
+
+Aw, come on, John. We're going to have a wonderful time!
+Aw, come on, John. We're going to have a wonderful time!
+Can you come out to play?
+Can you come out to play?
+Aw, come on, . We're going to have a wonderful time!
+Aw, come on, . We're going to have a wonderful time!
+

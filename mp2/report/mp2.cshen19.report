@@ -1,0 +1,24 @@
+mp2 report for cshen19:
+
+                                                            SCORE     OUT OF
+Continuations for Primitive Operations
+   consk                                                        0         0
+Continuations for Primitive Operations
+   diff_flipk                                                   5         5
+Continuations for Primitive Operations
+   quadk                                                        5         5
+Continuations for Primitive Operations
+   three_freeze                                                 5         5
+Continuations for Primitive Operations
+   shift                                                        5         5
+Transforming Recursive Functions
+   all_positive                                                 7         7
+Transforming Recursive Functions
+   list_prod                                                    7         7
+Transforming Recursive Functions
+   even_count                                                   8         8
+Continuations for Higher-Order Functions
+   find_all                                                     8         8
+Continuations for Higher-Order Functions
+   sum_all                                                      8         8
+Total:                                                       58        58

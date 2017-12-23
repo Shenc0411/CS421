@@ -1,0 +1,37 @@
+
+ml1 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [3 / 3]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 3
+
+Functional_Programming-basic_function_float_arith-code_ocaml_autograded-circumference/grader program output
+---------------------
+
+
+[1 / 1] pi (correct)
+[1 / 1] circumference 1.0 (correct)
+[1 / 1] circumference 0.1 (correct)
+
+Total: [3 / 3]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+(* Put code for pi and circumference here. *)
+let pi = 3.14159;;
+let circumference r = 2.0 *. pi *. r;;
+Stdout
+----------------------------------------------------
+
+

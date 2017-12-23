@@ -1,0 +1,42 @@
+
+mp1 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [5 / 5]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 5
+
+Functional_Programming-patternMatching_pair-code_ocaml_autograded-swap_eq/grader program output
+---------------------
+
+
+[1 / 1] swap_eq (2., 0.) (0., -1.) (correct)
+[1 / 1] swap_eq ((), 1) (1, ()) (correct)
+[1 / 1] swap_eq (-1., 0.) (0., 2.) (correct)
+[1 / 1] swap_eq (1., 1.) (-1., -1.) (correct)
+[1 / 1] swap_eq (0., 0.) (0., 0.) (correct)
+
+Total: [5 / 5]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+(* Put code for swap_eq here. *)
+let swap_eq p1 p2 = 
+    let (a1, b1) = p1 in
+    let (a2, b2) = p2 in
+    if a1 = b2 && b1 = a2 then true
+    else false
+Stdout
+----------------------------------------------------
+
+

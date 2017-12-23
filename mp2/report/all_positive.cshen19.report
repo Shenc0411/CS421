@@ -1,0 +1,50 @@
+
+mp2 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [7 / 7]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 7
+
+Functional_Programming-continuationPassingStyle_CPSTransformToOCaml-code_ocaml_autograded-all_positive/grader program output
+---------------------
+
+
+[1 / 1] all_positive [5;3;6;(-1);7] (correct)
+[1 / 1] tail_recursion_check file "all_positive" (correct)
+[1 / 1] all_positivek [5;3;6;(-1);7] (fun b -> if b then "true" else "false") (correct)
+[2 / 2] is_cps_check file "all_positivek" (correct)
+[2 / 2] is_cps_of_check file "all_positive" "all_positivek" (correct)
+
+Total: [7 / 7]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+ open Common (* Leave this line here! *) 
+ (*Put code for all_positive and all_positivek here. *)
+let rec all_positive l = 
+    match l with [] -> true
+    | x::xs -> 
+        if 0 >= x then false
+        else all_positive xs;;
+
+let rec all_positivek l k =
+    match l with [] -> k true
+    | x::xs ->
+        geqk (0, x) (fun t0 ->
+        if t0 then k false
+        else all_positivek xs k);;
+Stdout
+----------------------------------------------------
+
+

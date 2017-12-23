@@ -1,0 +1,183 @@
+   0  $accept : %entry% $end
+
+   1  main : expression DSEMI
+   2       | LET IDENT EQUALS expression DSEMI
+   3       | LET REC IDENT IDENT EQUALS expression DSEMI
+
+   4  expression : atomic_expression
+
+   5  pat : UNDERSCORE
+   6      | INT
+
+   7  atomic_expression : IDENT
+   8                    | INT
+   9                    | FLOAT
+
+  10  %entry% : '\001' main
+
+state 0
+	$accept : . %entry% $end  (0)
+
+	'\001'  shift 1
+	.  error
+
+	%entry%  goto 2
+
+
+state 1
+	%entry% : '\001' . main  (10)
+
+	INT  shift 3
+	FLOAT  shift 4
+	IDENT  shift 5
+	LET  shift 6
+	.  error
+
+	main  goto 7
+	expression  goto 8
+	atomic_expression  goto 9
+
+
+state 2
+	$accept : %entry% . $end  (0)
+
+	$end  accept
+
+
+state 3
+	atomic_expression : INT .  (8)
+
+	.  reduce 8
+
+
+state 4
+	atomic_expression : FLOAT .  (9)
+
+	.  reduce 9
+
+
+state 5
+	atomic_expression : IDENT .  (7)
+
+	.  reduce 7
+
+
+state 6
+	main : LET . IDENT EQUALS expression DSEMI  (2)
+	main : LET . REC IDENT IDENT EQUALS expression DSEMI  (3)
+
+	IDENT  shift 10
+	REC  shift 11
+	.  error
+
+
+state 7
+	%entry% : '\001' main .  (10)
+
+	.  reduce 10
+
+
+state 8
+	main : expression . DSEMI  (1)
+
+	DSEMI  shift 12
+	.  error
+
+
+state 9
+	expression : atomic_expression .  (4)
+
+	.  reduce 4
+
+
+state 10
+	main : LET IDENT . EQUALS expression DSEMI  (2)
+
+	EQUALS  shift 13
+	.  error
+
+
+state 11
+	main : LET REC . IDENT IDENT EQUALS expression DSEMI  (3)
+
+	IDENT  shift 14
+	.  error
+
+
+state 12
+	main : expression DSEMI .  (1)
+
+	.  reduce 1
+
+
+state 13
+	main : LET IDENT EQUALS . expression DSEMI  (2)
+
+	INT  shift 3
+	FLOAT  shift 4
+	IDENT  shift 5
+	.  error
+
+	expression  goto 15
+	atomic_expression  goto 9
+
+
+state 14
+	main : LET REC IDENT . IDENT EQUALS expression DSEMI  (3)
+
+	IDENT  shift 16
+	.  error
+
+
+state 15
+	main : LET IDENT EQUALS expression . DSEMI  (2)
+
+	DSEMI  shift 17
+	.  error
+
+
+state 16
+	main : LET REC IDENT IDENT . EQUALS expression DSEMI  (3)
+
+	EQUALS  shift 18
+	.  error
+
+
+state 17
+	main : LET IDENT EQUALS expression DSEMI .  (2)
+
+	.  reduce 2
+
+
+state 18
+	main : LET REC IDENT IDENT EQUALS . expression DSEMI  (3)
+
+	INT  shift 3
+	FLOAT  shift 4
+	IDENT  shift 5
+	.  error
+
+	expression  goto 19
+	atomic_expression  goto 9
+
+
+state 19
+	main : LET REC IDENT IDENT EQUALS expression . DSEMI  (3)
+
+	DSEMI  shift 20
+	.  error
+
+
+state 20
+	main : LET REC IDENT IDENT EQUALS expression DSEMI .  (3)
+
+	.  reduce 3
+
+
+Rules never reduced:
+	pat : UNDERSCORE  (5)
+	pat : INT  (6)
+
+
+60 terminals, 6 nonterminals
+11 grammar rules, 21 states

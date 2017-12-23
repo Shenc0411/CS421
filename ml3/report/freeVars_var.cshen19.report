@@ -1,0 +1,49 @@
+
+ml3 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [1 / 1]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 1
+
+Functional_Programming-adts_CPSTransformation_freeVariables-code_ocaml_autograded-var/grader program output
+---------------------
+
+
+[1 / 1] freeVarsInExp (VarExp "x") (correct)
+
+Total: [1 / 1]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common
+open Plsolution
+(* Leave these lines here! *)
+(* Put code for var at the bottom, after removing the raise. *)
+let rec freeVarsInExp exp =
+  match exp
+  with ConstExp c -> freeVarsInConstExp c freeVarsInExp
+    | MonOpAppExp (m,e) -> freeVarsInMonOpAppExp (m,e) freeVarsInExp
+    | BinOpAppExp (b,e1,e2) -> freeVarsInBinOpAppExp (b,e1,e2) freeVarsInExp
+    | IfExp (e1,e2,e3) -> freeVarsInIfExp (e1,e2,e3) freeVarsInExp
+    | AppExp (e1,e2) -> freeVarsInAppExp (e1,e2) freeVarsInExp
+    | FunExp (f,e) -> freeVarsInFunExp (f,e) freeVarsInExp
+    | LetRecInExp (f,x,e1,e2) -> freeVarsInLetRecInExp (f,x,e1,e2) freeVarsInExp
+    | LetInExp (x,e1,e2) -> freeVarsInLetInExp (x,e1,e2) freeVarsInExp 
+(* Remove the raise and put your code where the raise is now. *) 
+    | VarExp x -> [x]
+
+Stdout
+----------------------------------------------------
+
+

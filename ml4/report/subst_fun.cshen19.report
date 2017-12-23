@@ -1,0 +1,47 @@
+
+ml4 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [6 / 6]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 6
+
+Typing_and_Type_Systems-substitution-code_ocaml_autograded-subst_fun/grader program output
+---------------------
+
+
+[1 / 1] subst_fun [] (correct)
+[1 / 1] subst_fun [(5, mk_fun_ty bool_ty (TyVar(2)))] (correct)
+[1 / 1] subst_fun [(1, TyConst("bool", []))] (correct)
+[1 / 1] subst_fun [(5, TyConst("->", [TyConst("bool", []); TyVar 2])); (1, TyConst("bool", []))] (correct)
+[1 / 1] subst_fun [(5, TyConst("->", [TyConst("bool", []); TyVar 2])); (1, TyConst("bool", [])); (2, TyVar 1)] (correct)
+[1 / 1] subst_fun [(17, TyVar 23); (23, TyVar 17)] (correct)
+
+Total: [6 / 6]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common
+(* Leave this line here! *)
+
+let rec subst_fun sigma tv =
+  match sigma with [] -> TyVar(tv)
+  | ((a, b) :: tl) ->
+      if a = tv then b
+      else subst_fun tl tv
+
+
+Stdout
+----------------------------------------------------
+
+

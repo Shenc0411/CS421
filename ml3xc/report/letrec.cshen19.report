@@ -1,0 +1,52 @@
+
+ml3xc grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [3 / 3]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 3
+
+Functional_Programming-adts_CPSTransformation_cpsExp-code_ocaml_autograded-letrec/grader program output
+---------------------
+
+
+[1 / 1] cps_exp (LetRecInExp ("f", "x",VarExp "x", ConstExp (IntConst 4))) (ContVarCPS Kvar) (correct)
+[1 / 1] cps_exp_sol ackermann External (correct)
+[1 / 1] cps_exp_sol e (FnContCPS("b",AppCPS(k1,"a","b"))) (correct)
+
+Total: [3 / 3]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common
+open Plsolution
+(* Leave these line here! *)
+(* Put code for fun at the bottom, after removing the raise. *)
+let rec cps_exp e k = 
+   match e with 
+     VarExp x -> cps_exp_VarExp x k cps_exp
+   | ConstExp n -> cps_exp_ConstExp n k cps_exp
+   | MonOpAppExp (m, e) -> cps_exp_MonOpAppExp (m, e) k cps_exp
+   | BinOpAppExp (b, e1, e2) -> cps_exp_BinOpAppExp (b, e1, e2) k cps_exp
+   | IfExp (e1,e2,e3) -> cps_exp_IfExp (e1,e2,e3) k cps_exp
+   | AppExp (e1,e2) -> cps_exp_AppExp (e1,e2) k cps_exp
+   | FunExp (x,e) -> cps_exp_FunExp (x,e) k cps_exp
+   | LetInExp (x,e1,e2) -> cps_exp_LetInExp (x,e1,e2) k cps_exp
+(* Remove the raise and put your code where the raise is now. *) 
+   | LetRecInExp(f,x,e1,e2) -> 
+       FixCPS(FnContCPS(f, cps_exp e2 k), f, x, Kvar, cps_exp e1 (ContVarCPS Kvar))
+
+Stdout
+----------------------------------------------------
+
+

@@ -1,0 +1,10 @@
+ml2 report for cshen19:
+
+                                                            SCORE     OUT OF
+Forward Recursion and fold_right
+   even_count_fr                                                6         6
+Tail Recursion and fold_left
+   split_sum                                                    6         6
+More complex forward and tail recursion
+   app_all_with                                                 0         5
+Total:                                                       12        17

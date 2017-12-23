@@ -1,0 +1,220 @@
+
+wa6 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [33 / 34]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 33
+
+Typing_and_Type_Systems-polymorphicTypeDerivations_computation_prooftreeDrawing-gradedOffline-pair_pair/grader program output
+---------------------
+
+
+Inference: 
+1. {} |- fun x -> (x , x) : 'a -> 'a * 'a
+
+2. {pair : ALL 'a. 'a -> 'a * 'a} |- pair (pair 3) : (int * int) * (int * int)
+
+---------------------------------------------------------------------------
+  {} |- let pair = fun x -> (x , x) in pair (pair 3) : (int * int) * (int * int)
+
+Status: 
+  No errors!
+
+Inference: 
+1. {x : 'a} |- (x , x) : 'a * 'a
+
+---------------------------------------------------------------------------
+  {} |- fun x -> (x , x) : 'a -> 'a * 'a
+
+Status: 
+  No errors!
+
+Inference: 
+1. {x : 'a} |- x : 'a
+
+2. {x : 'a} |- x : 'a
+
+---------------------------------------------------------------------------
+  {x : 'a} |- (x , x) : 'a * 'a
+
+Status: 
+Failed side condition binop_inst: Side condition (or absence there of) for binary operator is incorrect.
+Points lost: 1
+
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : 'a} |- x : 'a
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : 'a} |- x : 'a
+
+Status: 
+  No errors!
+
+Inference: 
+1. {pair : ALL 'a. 'a -> 'a * 'a} |- pair : (int * int) -> (int * int) * (int * int)
+
+2. {pair : ALL 'a. 'a -> 'a * 'a} |- pair 3 : int * int
+
+---------------------------------------------------------------------------
+  {pair : ALL 'a. 'a -> 'a * 'a} |- pair (pair 3) : (int * int) * (int * int)
+
+Status: 
+  No errors!
+
+Inference: 
+SC: {'a -> int * int}
+---------------------------------------------------------------------------
+  {pair : ALL 'a. 'a -> 'a * 'a} |- pair : (int * int) -> (int * int) * (int * int)
+
+Status: 
+  No errors!
+
+Inference: 
+1. {pair : ALL 'a. 'a -> 'a * 'a} |- pair : int -> int * int
+
+2. {pair : ALL 'a. 'a -> 'a * 'a} |- 3 : int
+
+---------------------------------------------------------------------------
+  {pair : ALL 'a. 'a -> 'a * 'a} |- pair 3 : int * int
+
+Status: 
+  No errors!
+
+Inference: 
+SC: {'a -> int}
+---------------------------------------------------------------------------
+  {pair : ALL 'a. 'a -> 'a * 'a} |- pair : int -> int * int
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {pair : ALL 'a. 'a -> 'a * 'a} |- 3 : int
+
+Status: 
+  No errors!
+
+Total: [33 / 34]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+{"serializedTree":{"root-l0a":{"left":"{ }","middle":"let pair = fun x -> (x, x) in pair(pair 3) : ((int * int) * (int * int))","right":"","label":"Let","sideCondition":""},"root-l0a-l1a":{"left":"{}","middle":"fun x -> (x, x)","right":"'a -> ('a * 'a)","label":"Fun","sideCondition":""},"root-l0a-l1a-l2a":{"left":"{x : 'a}","middle":"(x, x)","right":"('a * 'a)","label":"BinOp","sideCondition":""},"root-l0a-l1a-l2a-l3a":{"left":"{x : 'a}","middle":"x","right":"'a","label":"Var","sideCondition":""},"root-l0a-l1a-l2a-l3b":{"left":"{x : 'a}","middle":"x","right":"'a","label":"Var","sideCondition":""},"root-l0a-l1b":{"left":"{pair : ALL 'a. 'a -> ('a * 'a)}","middle":"pair(pair 3)","right":"((int * int) * (int * int))","label":"App","sideCondition":""},"root-l0a-l1b-l2a":{"left":"{pair : ALL 'a. 'a -> ('a * 'a)}","middle":"pair","right":"(int * int) -> ((int * int) * (int * int))","label":"Var","sideCondition":"'a -> (int * int)"},"root-l0a-l1b-l2b":{"left":"{pair : ALL 'a. 'a -> ('a * 'a)}","middle":"pair 3","right":"int * int","label":"App","sideCondition":""},"root-l0a-l1b-l2b-l3a":{"left":"{pair : ALL 'a. 'a -> ('a * 'a)}","middle":"pair","right":"int -> (int * int)","label":"Var","sideCondition":"'a -> int"},"root-l0a-l1b-l2b-l3b":{"left":"{pair : ALL 'a. 'a -> ('a * 'a)}","middle":"3","right":"int","label":"Const","sideCondition":""}}}
+
+------------------------------------------------------
+open Common
+let tree = [("root-l0a", {str_label = "Let"; str_left = "{}"; str_middle = "let pair = fun x -> (x , x) in pair (pair 3)"; str_right = "(int * int) * (int * int)"; str_sideCondition = ""}); ("root-l0a-l1a", {str_label = "Fun"; str_left = "{}"; str_middle = "fun x -> (x , x)"; str_right = "'a -> 'a * 'a"; str_sideCondition = ""}); ("root-l0a-l1a-l2a", {str_label = "BinOp"; str_left = "{x : 'a}"; str_middle = "(x , x)"; str_right = "'a * 'a"; str_sideCondition = ""}); ("root-l0a-l1a-l2a-l3a", {str_label = "Var"; str_left = "{x : 'a}"; str_middle = "x"; str_right = "'a"; str_sideCondition = ""}); ("root-l0a-l1a-l2a-l3b", {str_label = "Var"; str_left = "{x : 'a}"; str_middle = "x"; str_right = "'a"; str_sideCondition = ""}); ("root-l0a-l1b", {str_label = "App"; str_left = "{pair : ALL 'a. 'a -> 'a * 'a}"; str_middle = "pair (pair 3)"; str_right = "(int * int) * (int * int)"; str_sideCondition = ""}); ("root-l0a-l1b-l2a", {str_label = "Var"; str_left = "{pair : ALL 'a. 'a -> 'a * 'a}"; str_middle = "pair"; str_right = "(int * int) -> (int * int) * (int * int)"; str_sideCondition = "{'a -> int * int}"}); ("root-l0a-l1b-l2b", {str_label = "App"; str_left = "{pair : ALL 'a. 'a -> 'a * 'a}"; str_middle = "pair 3"; str_right = "int * int"; str_sideCondition = ""}); ("root-l0a-l1b-l2b-l3a", {str_label = "Var"; str_left = "{pair : ALL 'a. 'a -> 'a * 'a}"; str_middle = "pair"; str_right = "int -> int * int"; str_sideCondition = "{'a -> int}"}); ("root-l0a-l1b-l2b-l3b", {str_label = "Const"; str_left = "{pair : ALL 'a. 'a -> 'a * 'a}"; str_middle = "3"; str_right = "int"; str_sideCondition = ""})]
+
+------------------------------------------------------
+
+Stdout
+----------------------------------------------------
+
+Inference: 
+1. {} |- fun x -> (x , x) : 'a -> 'a * 'a
+
+2. {pair : ALL 'a. 'a -> 'a * 'a} |- pair (pair 3) : (int * int) * (int * int)
+
+---------------------------------------------------------------------------
+  {} |- let pair = fun x -> (x , x) in pair (pair 3) : (int * int) * (int * int)
+
+Status: 
+  No errors!
+
+Inference: 
+1. {x : 'a} |- (x , x) : 'a * 'a
+
+---------------------------------------------------------------------------
+  {} |- fun x -> (x , x) : 'a -> 'a * 'a
+
+Status: 
+  No errors!
+
+Inference: 
+1. {x : 'a} |- x : 'a
+
+2. {x : 'a} |- x : 'a
+
+---------------------------------------------------------------------------
+  {x : 'a} |- (x , x) : 'a * 'a
+
+Status: 
+Failed side condition binop_inst: Side condition (or absence there of) for binary operator is incorrect.
+Points lost: 1
+
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : 'a} |- x : 'a
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {x : 'a} |- x : 'a
+
+Status: 
+  No errors!
+
+Inference: 
+1. {pair : ALL 'a. 'a -> 'a * 'a} |- pair : (int * int) -> (int * int) * (int * int)
+
+2. {pair : ALL 'a. 'a -> 'a * 'a} |- pair 3 : int * int
+
+---------------------------------------------------------------------------
+  {pair : ALL 'a. 'a -> 'a * 'a} |- pair (pair 3) : (int * int) * (int * int)
+
+Status: 
+  No errors!
+
+Inference: 
+SC: {'a -> int * int}
+---------------------------------------------------------------------------
+  {pair : ALL 'a. 'a -> 'a * 'a} |- pair : (int * int) -> (int * int) * (int * int)
+
+Status: 
+  No errors!
+
+Inference: 
+1. {pair : ALL 'a. 'a -> 'a * 'a} |- pair : int -> int * int
+
+2. {pair : ALL 'a. 'a -> 'a * 'a} |- 3 : int
+
+---------------------------------------------------------------------------
+  {pair : ALL 'a. 'a -> 'a * 'a} |- pair 3 : int * int
+
+Status: 
+  No errors!
+
+Inference: 
+SC: {'a -> int}
+---------------------------------------------------------------------------
+  {pair : ALL 'a. 'a -> 'a * 'a} |- pair : int -> int * int
+
+Status: 
+  No errors!
+
+Inference: 
+---------------------------------------------------------------------------
+  {pair : ALL 'a. 'a -> 'a * 'a} |- 3 : int
+
+Status: 
+  No errors!
+

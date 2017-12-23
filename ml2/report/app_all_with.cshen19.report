@@ -1,0 +1,35 @@
+
+ml2 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [0 / 0]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 0
+
+Functional_Programming-recursion_higherOrderFunctions_complex-code_ocaml_autograded-app_all_with/grader program output
+---------------------
+
+
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+Error: This expression has type ('a -> 'b -> 'c) list -> 'a -> 'b -> 'c list
+make: *** [rubric.cmo] Error 2
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+(* Put code for app_all_with here. *)
+let app_all_with fs b l =
+    let a = List.map (fun f -> f b) fs in
+    List.map (fun f -> f l) a;;
+    
+    
+Stdout
+----------------------------------------------------
+

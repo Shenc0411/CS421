@@ -1,0 +1,91 @@
+(**************************************************************************
+ * You can add new test cases by adding new elements to the following lists
+ * Format is:
+ * TEST<X>ARG(<weight>, <function_name>, <arg1>, <arg2>, ..., <argX>)
+ *
+ * <X> is the number of argument that the function being tested takes.
+ **************************************************************************)
+
+let file = "student.ml"
+
+open Check_cps
+let is_cps_check _ _ = true
+let is_cps_of_check _ _ _ = true
+
+let idk x = x
+
+open Common
+
+(* This list is for regular problems *)
+let rubric =
+[
+  TEST2ARG(0, consk, (1, []), (List.map string_of_int));
+  TEST2ARG(0, consk, (1, []), (fun x -> ()));
+  TEST2ARG(0, concatk, ("hello", "world"), (fun s -> (s , String.length s)));
+  TEST2ARG(0, concatk, ("hello", "world"), (fun s -> ()));
+  TEST2ARG(0, string_of_intk, 1, (fun s -> (s , String.length s)));
+  TEST2ARG(0, string_of_intk, 1, (fun s -> ()));
+  TEST2ARG(0, truncatek, 3.14, string_of_int);
+  TEST2ARG(0, truncatek, 3.14, (fun s -> ()));
+
+  TEST2ARG(1, diff_flipk, 1, report_int);
+  TEST2ARG(0, diff_flipk, 1, (fun s -> ()));
+  TEST2ARG_TWOFUN(2, is_cps_check, check_is_cps, file, "diff_flipk");
+
+  TEST2ARG(1, quadk, (1, 1, 1), report_int);
+  TEST2ARG(0, quadk, (1, 1, 1), (fun s -> ()));
+  TEST2ARG_TWOFUN(2, is_cps_check, check_is_cps, file, "quadk");
+  
+  TEST2ARG(1, three_freezek, ("muda", "plop"), (fun s -> (s, String.length s)));
+  TEST2ARG(0, three_freezek, ("muda", "plop"), (fun s -> ()));
+  TEST2ARG_TWOFUN(2, is_cps_check, check_is_cps, file, "three_freezek");
+
+  TEST2ARG(1, shiftk, ("--", 3.14), (fun s -> (s , String.length s)));
+  TEST2ARG(0, shiftk, ("--", 3.14), (fun s -> ()));
+  TEST2ARG_TWOFUN(2, is_cps_check, check_is_cps, file, "shiftk");
+
+  TEST1ARG(1, list_prod, [1;2;3]);
+  TEST2ARG(0, list_prodk, [], (fun s -> ()));
+  TEST2ARG(0, list_prodk, [], (fun s -> (idk s;())));
+  TEST2ARG(1, list_prodk, [1;2;3], idk);
+  TEST2ARG_TWOFUN(2, is_cps_check, check_is_cps, file, "list_prodk");
+  TEST3ARG_TWOFUN(2, is_cps_of_check, check_is_cps_of, file, "list_prod", "list_prodk");
+
+  TEST1ARG(1, all_positive, [5;3;6;(-1);7]);
+  TEST2ARG(0, all_positivek, [], (fun b -> ()));
+  TEST2ARG(0, all_positivek, [], (fun b -> (idk b;())));
+  TEST2ARG(1, all_positivek, [5;3;6;(-1);7], (fun b -> if b then "true" else "false"));
+  TEST2ARG_TWOFUN(2, is_cps_check, check_is_cps, file, "all_positivek");
+  TEST3ARG_TWOFUN(2, is_cps_of_check, check_is_cps_of, file, "all_positive", "all_positivek");
+
+  TEST1ARG(1, even_count, [1;2;3]);
+  TEST2ARG(1, even_countk, [1;2;3], string_of_int);
+  TEST2ARG(0, even_countk, [1;2;3], (fun s -> ()));
+  TEST2ARG(0, even_countk, [1;2;3], (fun s -> (idk(s);())));
+  TEST2ARG_TWOFUN(2, is_cps_check, check_is_cps, file, "even_countk");
+  TEST3ARG_TWOFUN(2, is_cps_of_check, check_is_cps_of, file, "even_count", "even_countk");
+
+  TEST1ARG(1, find_all, ((fun x -> x mod 2 = 0), [-3; 5; 2; -6])) ;
+  TEST2ARG(0, find_allk, ((fun x -> fun k -> k true), [()]), (fun s -> ()));
+  TEST2ARG(0, find_allk, ((fun x -> fun k -> k true), [()]), (fun s -> idk(s);()));
+  TEST2ARG(1, find_allk, ((fun x -> fun k -> modk (x, 2) (fun n -> eqk (n, 0) k)), [-3; 5; 2; -6]), (fun s -> (idk(List.map string_of_int s))));
+  TEST2ARG_TWOFUN(2, is_cps_check, check_is_cps, file, "find_allk");
+  TEST3ARG_TWOFUN(2, is_cps_of_check, check_is_cps_of, file, "find_all", "find_allk");
+
+  TEST1ARG(1, sum_all, ((fun x -> truncate x >= 2), [1.3;2.5;3.9]));
+  TEST2ARG(0, sum_allk, ((fun x -> fun k -> k true), []), (fun s -> ()));
+  TEST2ARG(0, sum_allk, ((fun x -> fun k -> k true), []), (fun s -> idk(s);()));
+  TEST2ARG(1, sum_allk, ((fun x -> fun k -> Solution.truncatek x (fun y -> geqk(y,2) k)), [1.3;2.5;3.9]), (fun s -> idk(string_of_float s)));
+  TEST2ARG_TWOFUN(2, is_cps_check, check_is_cps, file, "sum_allk");
+  TEST3ARG_TWOFUN(2, is_cps_of_check, check_is_cps_of, file, "sum_all", "sum_allk")
+]
+(* Note: the last entry should not be followed by a semicolon. *)
+
+let extra_rubric = [
+	TEST1ARG(1, list_compose, [(fun x -> x * x) ; (fun x -> x + 2)]);
+	TEST2ARG(1, list_composek, [(fun x -> mulk(x,x)) ; (fun x -> addk(x,2))], string_of_int);
+	TEST2ARG(0, list_composek, [(fun x -> mulk(x,x)) ; (fun x -> addk(x,2))], (fun s -> ()));
+	TEST2ARG(0, list_composek, [], (fun s -> (idk s; ())));
+  TEST2ARG_TWOFUN(2, is_cps_check, check_is_cps, file, "list_composek");
+  TEST3ARG_TWOFUN(2, is_cps_of_check, check_is_cps_of, file, "list_compose", "list_composek")
+]

@@ -1,0 +1,61 @@
+(**************************************************************************
+ * You can add new test cases by adding new elements to the following lists
+ * Format is:
+ * TEST<X>ARG(<weight>, <function_name>, <arg1>, <arg2>, ..., <argX>)
+ *
+ * <X> is the number of argument that the function being tested takes.
+ **************************************************************************)
+open Common
+
+let freeVarsInExp_stu e = Common.mergesort (Student.freeVarsInExp e)
+let freeVarsInExp_sol e = Common.mergesort (Solution.freeVarsInExp e)
+let cps_exp_stu e k =
+    let ec = Student.cps_exp e k
+    in Common.exp_cps_normalize ec (Solution.freeVarsInExp e) 
+let cps_exp_sol e k =
+    let ec = Solution.cps_exp e k
+    in Common.exp_cps_normalize ec (Solution.freeVarsInExp e)
+
+(* This list is for regular problems *)
+let rubric =
+[
+  TEST1ARG(1, import_list, [(7,1);(4,2);(6,3)]);
+  TEST0ARG(1, pair_sums);
+  TEST1ARG(1, count_const_in_exp,  (BinOpAppExp (CommaOp,
+ BinOpAppExp (CommaOp, ConstExp (FloatConst 7.3), ConstExp UnitConst),
+ BinOpAppExp (ConsOp,
+  BinOpAppExp (CommaOp, ConstExp (IntConst 4), ConstExp (StringConst "a")),
+  BinOpAppExp (ConsOp,
+   BinOpAppExp (CommaOp, ConstExp (IntConst 6), ConstExp (StringConst "b")),
+   ConstExp NilConst)))));
+  TEST1ARG(1, freeVarsInExp, (VarExp "x"));
+  TEST1ARG_TWOFUN(1, freeVarsInExp_sol, freeVarsInExp_stu, (IfExp(ConstExp (BoolConst true), VarExp "x", VarExp "y")));
+  TEST1ARG(1, freeVarsInExp, (FunExp("x", VarExp "x")));
+  TEST1ARG_TWOFUN(1, freeVarsInExp_sol, freeVarsInExp_stu, (LetInExp("x", VarExp "y", VarExp "x")));
+  TEST1ARG_TWOFUN(1, freeVarsInExp_sol, freeVarsInExp_stu,
+                  (LetRecInExp("f","x",AppExp(VarExp "f",VarExp "x"),
+                               AppExp(VarExp "f",VarExp "y"))));
+  TEST2ARG(1, cps_exp, (VarExp "x"), (ContVarCPS Kvar));
+  TEST2ARG_TWOFUN(1, cps_exp_sol, cps_exp_stu, (IfExp (VarExp "b", ConstExp (IntConst 2),
+                                         ConstExp (IntConst 5))),
+                                 (ContVarCPS Kvar));
+  TEST2ARG_TWOFUN(1, cps_exp_sol, cps_exp_stu, (AppExp (VarExp "f", VarExp "x")),
+                         (ContVarCPS Kvar));
+  TEST2ARG_TWOFUN(1, cps_exp_sol, cps_exp_stu, (BinOpAppExp (IntPlusOp, ConstExp(IntConst 5),
+                                              ConstExp(IntConst 1))),
+                          (ContVarCPS Kvar));
+  TEST2ARG_TWOFUN(1, cps_exp_sol, cps_exp_stu, (MonOpAppExp (HdOp, ConstExp NilConst)),
+                                 (ContVarCPS Kvar));
+  TEST2ARG_TWOFUN(1, cps_exp_sol, cps_exp_stu, (FunExp ("x", VarExp "x")),
+                                 (ContVarCPS Kvar));
+  TEST2ARG_TWOFUN(1, cps_exp_sol, cps_exp_stu, (LetInExp ("x", ConstExp(IntConst 2), VarExp "x")),
+                      (ContVarCPS Kvar))
+
+]
+
+
+let extra_rubric = [
+  TEST2ARG_TWOFUN(1, cps_exp_sol, cps_exp_stu,  (LetRecInExp ("f", "x",VarExp "x",
+                                               ConstExp (IntConst 4))),
+                                 (ContVarCPS Kvar))
+]

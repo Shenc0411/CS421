@@ -1,0 +1,67 @@
+open Mp6common
+let rubric_version = "1.0"
+let rubric_title = "CS421 Fall 2017 MP6"
+
+(**************************************************************************
+ * You can add new test cases by adding new elements to the following lists
+ * Format is:
+ * TEST<X>ARG(<weight>, <function_name>, <arg1>, <arg2>, ..., <argX>)
+ *
+ * <X> is the number of argument that the function being tested takes.
+ **************************************************************************)
+
+let parse s = Picomlparse.main Picomllex.token (Lexing.from_string s)
+
+let rubric = [
+TEST3ARG(1, app_cont_to_value, [], External, (IntVal 6));
+
+TEST2ARG(1, one_step_exp_cps_eval, [], (ConstCPS(External, IntConst 2)));
+
+TEST2ARG(1, one_step_exp_cps_eval, [ValueBinding("x", IntVal 2)],
+ (VarCPS(External, "x")));
+
+TEST2ARG(1, one_step_exp_cps_eval, [ValueBinding("x", IntVal 2)],
+ (MonOpAppCPS(External, IntNegOp, "x", EmptyExnContCPS)));
+
+TEST2ARG(1, one_step_exp_cps_eval,
+ [ValueBinding("b", IntVal 3);ValueBinding("a", IntVal 2)],
+ (BinOpAppCPS(External, IntPlusOp, "a", "b", EmptyExnContCPS)));
+
+TEST2ARG(1, one_step_exp_cps_eval, [ValueBinding("a", BoolVal true)],
+ (IfCPS("a", ConstCPS(External,IntConst 1), ConstCPS(External,IntConst 0))));
+
+TEST2ARG(1, one_step_exp_cps_eval, [], (FunCPS (External, "x", Kvar, 0,
+   VarCPS
+    (FnContCPS ("a",
+      ConstCPS
+       (FnContCPS ("b",
+         BinOpAppCPS (ContVarCPS Kvar, IntPlusOp, "a", "b", ExnContVarCPS 0)),
+       IntConst 5)),
+    "x"))));
+
+
+TEST2ARG(1, one_step_exp_cps_eval, [],
+  (let e1 = IfExp (BinOpAppExp (EqOp, VarExp "n", ConstExp (IntConst 0)),
+  ConstExp (IntConst 1),
+  AppExp (VarExp "f",
+   BinOpAppExp (IntMinusOp, VarExp "n", ConstExp (IntConst 1)))) in
+   let e1cps = cps_exp e1 (ContVarCPS Kvar) (ExnContVarCPS 0) in
+   (FixCPS(FnContCPS("f",VarCPS(External, "f")),"f","n",Kvar,0,e1cps))));
+
+TEST2ARG(1, one_step_exp_cps_eval,
+ [ValueBinding("plus5", (CPSClosureVal ("x", Kvar, 0,
+  VarCPS
+   (FnContCPS ("a",
+     ConstCPS
+      (FnContCPS ("b",
+        BinOpAppCPS (ContVarCPS Kvar, IntPlusOp, "a", "b", ExnContVarCPS 0)),
+      IntConst 5)),
+   "x"),
+   [])));
+  ValueBinding("c",IntVal 2)],
+ (AppCPS(External, "plus5", "c", EmptyExnContCPS)))
+]
+
+(* This list is for extra credit problems *)
+
+let extra_rubric = []

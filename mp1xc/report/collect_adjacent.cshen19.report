@@ -1,0 +1,48 @@
+
+mp1xc grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [5 / 5]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 5
+
+Functional_Programming-recursion_complex_list-code_ocaml_autograded-collect_adjacent/grader program output
+---------------------
+
+
+[1 / 1] collect_adjacent [(1, "a"); (1, "d"); (1, "b"); (0, "b"); (0, "z"); (1, "a"); (1, "z"); (3, "t")] (correct)
+[1 / 1] collect_adjacent [(true, 4.); (false, 4.); (false, 4.); (true, 4.)] (correct)
+[1 / 1] collect_adjacent [(1, 2); (3, 4); (5, 6)] (correct)
+[1 / 1] collect_adjacent [(1, 2); (1, 4); (1, 6); (1, 2)] (correct)
+[1 / 1] collect_adjacent [] (correct)
+
+Total: [5 / 5]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+(* Put code for collect_adjacent here. *)
+let rec collect_adjacent l = 
+  match l with
+  [] -> []
+  | ((n, a)::xs) -> let tail_result = collect_adjacent xs in
+    match tail_result with
+    | [] -> [(n,[a])]
+    | ((m, b)::ts) -> 
+      if m = n then
+        ((m, a::b)::ts)
+      else
+        ((n, [a])::tail_result);;
+Stdout
+----------------------------------------------------
+
+

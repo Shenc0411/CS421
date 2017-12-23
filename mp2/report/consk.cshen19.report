@@ -1,0 +1,45 @@
+
+mp2 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [8 / 8]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 8
+
+Functional_Programming-continuations_basic-code_ocaml_autograded-consk/grader program output
+---------------------
+
+
+[1 / 1] consk (1, []) (List.map string_of_int) (correct)
+[1 / 1] consk (1, []) (fun x -> ()) (correct)
+[1 / 1] concatk ("hello", "world") (fun s -> (s , String.length s)) (correct)
+[1 / 1] concatk ("hello", "world") (fun s -> ()) (correct)
+[1 / 1] string_of_intk 1 (fun s -> (s , String.length s)) (correct)
+[1 / 1] string_of_intk 1 (fun s -> ()) (correct)
+[1 / 1] truncatek 3.14 string_of_int (correct)
+[1 / 1] truncatek 3.14 (fun s -> ()) (correct)
+
+Total: [8 / 8]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+(* Put code for consk, concatk, string_of_intk, and truncatek here. *)
+open Common
+let consk (x, l) k = k (x::l);;
+let concatk (s1, s2) k = k (s1^s2);;
+let string_of_intk n k = k (string_of_int n);;
+let truncatek x k = k (truncate x);;
+Stdout
+----------------------------------------------------
+
+

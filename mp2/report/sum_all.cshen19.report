@@ -1,0 +1,59 @@
+
+mp2 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [12 / 12]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 12
+
+Functional_Programming-continuationPassingStyle_higherOrderFun-code_ocaml_autograded-sum_all/grader program output
+---------------------
+
+
+[1 / 1] sum_all ((fun x -> truncate x >= 2), [1.3;2.5;3.9]) (correct)
+[1 / 1] forward_recursion_check file "sum_all" (correct)
+[0 / 0] sum_allk ((fun x -> fun k -> k true), []) (fun s -> ()) (correct)
+[0 / 0] sum_allk ((fun x -> fun k -> k true), []) (fun s -> idk(s);()) (correct)
+[1 / 1] sum_allk ((fun x -> fun k -> Solution.truncatek x (fun y -> geqk(y,2) k)), [1.3;2.5;3.9]) (fun s -> idk(string_of_float s)) (correct)
+[1 / 1] sum_allk ((fun x -> fun k -> k true), []) (fun s -> idk(string_of_float s)) (correct)
+[1 / 1] sum_allk ((fun x -> fun k -> k false), [4.0;20.0;1.0]) idk (correct)
+[1 / 1] sum_allk ((fun x -> fun k -> k true), [-2.5;0.0;-1.4;3.2]) idk (correct)
+[1 / 1] sum_allk ((fun x -> fun k -> (Solution.truncatek x (fun y -> gtk (y, 4) k))), [2.2;5.3;5.4;6.5]) idk (correct)
+[1 / 1] sum_allk ((fun x -> fun k -> (Solution.truncatek x (fun y -> modk(y,2) (fun r -> eqk(r,1) k)))), [-2.5;0.0;-1.4;3.2]) idk (correct)
+[2 / 2] is_cps_check file "sum_allk" (correct)
+[2 / 2] is_cps_of_check file "sum_all" "sum_allk" (correct)
+
+Total: [12 / 12]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+ open Common (* Leave this line here! *) 
+ (*Put code for sum_all and sum_allk here. *)
+let rec sum_all (p, l) =
+    match l with [] -> 0.0
+    | x::xs -> 
+        let result = sum_all (p, xs) in
+            if p x then x +. result
+            else result;;
+            
+let rec sum_allk (p, l) k =
+    match l with [] -> k 0.0
+    | x::xs ->
+        sum_allk (p, xs) (fun t0 ->
+            p x (fun t1 ->
+            if t1 then float_addk (x, t0) k
+            else k t0));;
+Stdout
+----------------------------------------------------
+
+

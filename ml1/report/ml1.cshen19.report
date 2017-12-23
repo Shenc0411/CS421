@@ -1,0 +1,14 @@
+ml1 report for cshen19:
+
+                                                            SCORE     OUT OF
+Variable Declaration
+   title                                                        1         1
+Basic Functions with Integer Arithmetic
+   firstFun                                                     2         2
+Basic Functions with Float Arithmetic
+   circumference                                                2         2
+Basic Programming, Conditional Functions with Printing
+   welcome                                                      3         3
+Basic Programming, Conditional Functions of Two Args
+   has_smallest_square                                          3         3
+Total:                                                       11        11

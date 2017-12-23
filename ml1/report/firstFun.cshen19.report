@@ -1,0 +1,35 @@
+
+ml1 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [2 / 2]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 2
+
+Functional_Programming-basic_function_int_arith-code_ocaml_autograded-firstFun/grader program output
+---------------------
+
+
+[1 / 1] firstFun 12 (correct)
+[1 / 1] firstFun 76 (correct)
+
+Total: [2 / 2]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+(* Put code for firstFun here. *)
+let firstFun n = (n * 2) + 5;;
+Stdout
+----------------------------------------------------
+
+

@@ -1,0 +1,668 @@
+
+ml5 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [18 / 19]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 18
+
+Lexing_and_Parsing-ocamlyaccGrammar-code_ocamlyacc_autograded-floatAddExpLet/grader program output
+---------------------
+
+
+[-1 / 0] Test for shift/reduce and reduce/reduce conflicts (Conflicts found)
+[1 / 1] parse "17.3;;" (correct)
+[1 / 1] parse "(31.9);;" (correct)
+[1 / 1] parse "let x = 3.9 ;;" (correct)
+[1 / 1] parse "let a = ((b));;" (correct)
+[1 / 1] parse "let x = (1.123);;" (correct)
+[2 / 2] parse "3.1 +. 2.0 -. 1.6 -. 4. +. 2.0 +. 4.13 -. 17.3 ;;" (correct)
+[1 / 1] parse "3.0 ** 4.4 ** 8.1 ** 0.3 ;;" (correct)
+[2 / 2] parse "let x = 3.1 ** 2.0 -. 4.3 ** 5.3 +. 3.2 ** 10.1 +. 32.9;;" (correct)
+[1 / 1] parse "let z = (3.4 +. 4.2) ** (7.1 -. 29.56);;" (correct)
+[1 / 1] parse "let x = let y = 2.3 in 4.5;;" (correct)
+[1 / 1] parse "let y = 9.0 +. let x = 3.5 in x;;" (correct)
+[1 / 1] parse "let y = 9.0 ** let x = 3.5 in x;;" (correct)
+[1 / 1] parse "let y = let x = 3.5 in x -. 9.0;;" (correct)
+[1 / 1] parse "let y = let x = 3.5 in x ** 9.0;;" (correct)
+[3 / 3] parse "let z = let x = let a = b +. 1.0 in let d = let e = a ** a in 2.0 ** e in d  +. 3.4 in x -. 0.1;;" (correct)
+
+Total: [18 / 19]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+   0  $accept : %entry% $end
+
+   1  main : expression DSEMI
+   2       | LET IDENT EQUALS expression DSEMI
+   3       | LET REC IDENT IDENT EQUALS expression DSEMI
+
+   4  expression : LET IDENT EQUALS expression IN expression
+   5             | not_let
+
+   6  not_let : not_let DPLUS not_pm
+   7          | not_let DMINUS not_pm
+   8          | atomic_expression EXP not_pm
+   9          | atomic_expression
+
+  10  not_pm : atomic_expression EXP not_pm
+  11         | not_pme
+
+  12  not_pme : LET IDENT EQUALS expression IN expression
+  13          | atomic_expression
+
+  14  list_exp : expression
+  15           | expression SEMI list_exp
+
+  16  atomic_expression : IDENT
+  17                    | FLOAT
+  18                    | LPAREN expression RPAREN
+  19                    | LBRAC RBRAC
+  20                    | LBRAC list_exp RBRAC
+
+  21  pat : UNDERSCORE
+  22      | INT
+
+  23  %entry% : '\001' main
+
+state 0
+	$accept : . %entry% $end  (0)
+
+	'\001'  shift 1
+	.  error
+
+	%entry%  goto 2
+
+
+state 1
+	%entry% : '\001' . main  (23)
+
+	FLOAT  shift 3
+	IDENT  shift 4
+	LET  shift 5
+	LBRAC  shift 6
+	LPAREN  shift 7
+	.  error
+
+	main  goto 8
+	expression  goto 9
+	not_let  goto 10
+	atomic_expression  goto 11
+
+
+state 2
+	$accept : %entry% . $end  (0)
+
+	$end  accept
+
+
+state 3
+	atomic_expression : FLOAT .  (17)
+
+	.  reduce 17
+
+
+state 4
+	atomic_expression : IDENT .  (16)
+
+	.  reduce 16
+
+
+state 5
+	main : LET . IDENT EQUALS expression DSEMI  (2)
+	main : LET . REC IDENT IDENT EQUALS expression DSEMI  (3)
+	expression : LET . IDENT EQUALS expression IN expression  (4)
+
+	IDENT  shift 12
+	REC  shift 13
+	.  error
+
+
+state 6
+	atomic_expression : LBRAC . RBRAC  (19)
+	atomic_expression : LBRAC . list_exp RBRAC  (20)
+
+	FLOAT  shift 3
+	IDENT  shift 4
+	LET  shift 14
+	LBRAC  shift 6
+	RBRAC  shift 15
+	LPAREN  shift 7
+	.  error
+
+	expression  goto 16
+	not_let  goto 10
+	atomic_expression  goto 11
+	list_exp  goto 17
+
+
+state 7
+	atomic_expression : LPAREN . expression RPAREN  (18)
+
+	FLOAT  shift 3
+	IDENT  shift 4
+	LET  shift 14
+	LBRAC  shift 6
+	LPAREN  shift 7
+	.  error
+
+	expression  goto 18
+	not_let  goto 10
+	atomic_expression  goto 11
+
+
+state 8
+	%entry% : '\001' main .  (23)
+
+	.  reduce 23
+
+
+state 9
+	main : expression . DSEMI  (1)
+
+	DSEMI  shift 19
+	.  error
+
+
+10: shift/reduce conflict (shift 20, reduce 5) on DPLUS
+10: shift/reduce conflict (shift 21, reduce 5) on DMINUS
+state 10
+	expression : not_let .  (5)
+	not_let : not_let . DPLUS not_pm  (6)
+	not_let : not_let . DMINUS not_pm  (7)
+
+	DPLUS  shift 20
+	DMINUS  shift 21
+	SEMI  reduce 5
+	DSEMI  reduce 5
+	IN  reduce 5
+	RBRAC  reduce 5
+	RPAREN  reduce 5
+
+
+state 11
+	not_let : atomic_expression . EXP not_pm  (8)
+	not_let : atomic_expression .  (9)
+
+	EXP  shift 22
+	DPLUS  reduce 9
+	DMINUS  reduce 9
+	SEMI  reduce 9
+	DSEMI  reduce 9
+	IN  reduce 9
+	RBRAC  reduce 9
+	RPAREN  reduce 9
+
+
+state 12
+	main : LET IDENT . EQUALS expression DSEMI  (2)
+	expression : LET IDENT . EQUALS expression IN expression  (4)
+
+	EQUALS  shift 23
+	.  error
+
+
+state 13
+	main : LET REC . IDENT IDENT EQUALS expression DSEMI  (3)
+
+	IDENT  shift 24
+	.  error
+
+
+state 14
+	expression : LET . IDENT EQUALS expression IN expression  (4)
+
+	IDENT  shift 25
+	.  error
+
+
+state 15
+	atomic_expression : LBRAC RBRAC .  (19)
+
+	.  reduce 19
+
+
+state 16
+	list_exp : expression .  (14)
+	list_exp : expression . SEMI list_exp  (15)
+
+	SEMI  shift 26
+	RBRAC  reduce 14
+
+
+state 17
+	atomic_expression : LBRAC list_exp . RBRAC  (20)
+
+	RBRAC  shift 27
+	.  error
+
+
+state 18
+	atomic_expression : LPAREN expression . RPAREN  (18)
+
+	RPAREN  shift 28
+	.  error
+
+
+state 19
+	main : expression DSEMI .  (1)
+
+	.  reduce 1
+
+
+state 20
+	not_let : not_let DPLUS . not_pm  (6)
+
+	FLOAT  shift 3
+	IDENT  shift 4
+	LET  shift 29
+	LBRAC  shift 6
+	LPAREN  shift 7
+	.  error
+
+	not_pm  goto 30
+	atomic_expression  goto 31
+	not_pme  goto 32
+
+
+state 21
+	not_let : not_let DMINUS . not_pm  (7)
+
+	FLOAT  shift 3
+	IDENT  shift 4
+	LET  shift 29
+	LBRAC  shift 6
+	LPAREN  shift 7
+	.  error
+
+	not_pm  goto 33
+	atomic_expression  goto 31
+	not_pme  goto 32
+
+
+state 22
+	not_let : atomic_expression EXP . not_pm  (8)
+
+	FLOAT  shift 3
+	IDENT  shift 4
+	LET  shift 29
+	LBRAC  shift 6
+	LPAREN  shift 7
+	.  error
+
+	not_pm  goto 34
+	atomic_expression  goto 31
+	not_pme  goto 32
+
+
+state 23
+	main : LET IDENT EQUALS . expression DSEMI  (2)
+	expression : LET IDENT EQUALS . expression IN expression  (4)
+
+	FLOAT  shift 3
+	IDENT  shift 4
+	LET  shift 14
+	LBRAC  shift 6
+	LPAREN  shift 7
+	.  error
+
+	expression  goto 35
+	not_let  goto 10
+	atomic_expression  goto 11
+
+
+state 24
+	main : LET REC IDENT . IDENT EQUALS expression DSEMI  (3)
+
+	IDENT  shift 36
+	.  error
+
+
+state 25
+	expression : LET IDENT . EQUALS expression IN expression  (4)
+
+	EQUALS  shift 37
+	.  error
+
+
+state 26
+	list_exp : expression SEMI . list_exp  (15)
+
+	FLOAT  shift 3
+	IDENT  shift 4
+	LET  shift 14
+	LBRAC  shift 6
+	LPAREN  shift 7
+	.  error
+
+	expression  goto 16
+	not_let  goto 10
+	atomic_expression  goto 11
+	list_exp  goto 38
+
+
+state 27
+	atomic_expression : LBRAC list_exp RBRAC .  (20)
+
+	.  reduce 20
+
+
+state 28
+	atomic_expression : LPAREN expression RPAREN .  (18)
+
+	.  reduce 18
+
+
+state 29
+	not_pme : LET . IDENT EQUALS expression IN expression  (12)
+
+	IDENT  shift 39
+	.  error
+
+
+state 30
+	not_let : not_let DPLUS not_pm .  (6)
+
+	.  reduce 6
+
+
+state 31
+	not_pm : atomic_expression . EXP not_pm  (10)
+	not_pme : atomic_expression .  (13)
+
+	EXP  shift 40
+	DPLUS  reduce 13
+	DMINUS  reduce 13
+	SEMI  reduce 13
+	DSEMI  reduce 13
+	IN  reduce 13
+	RBRAC  reduce 13
+	RPAREN  reduce 13
+
+
+state 32
+	not_pm : not_pme .  (11)
+
+	.  reduce 11
+
+
+state 33
+	not_let : not_let DMINUS not_pm .  (7)
+
+	.  reduce 7
+
+
+state 34
+	not_let : atomic_expression EXP not_pm .  (8)
+
+	.  reduce 8
+
+
+state 35
+	main : LET IDENT EQUALS expression . DSEMI  (2)
+	expression : LET IDENT EQUALS expression . IN expression  (4)
+
+	DSEMI  shift 41
+	IN  shift 42
+	.  error
+
+
+state 36
+	main : LET REC IDENT IDENT . EQUALS expression DSEMI  (3)
+
+	EQUALS  shift 43
+	.  error
+
+
+state 37
+	expression : LET IDENT EQUALS . expression IN expression  (4)
+
+	FLOAT  shift 3
+	IDENT  shift 4
+	LET  shift 14
+	LBRAC  shift 6
+	LPAREN  shift 7
+	.  error
+
+	expression  goto 44
+	not_let  goto 10
+	atomic_expression  goto 11
+
+
+state 38
+	list_exp : expression SEMI list_exp .  (15)
+
+	.  reduce 15
+
+
+state 39
+	not_pme : LET IDENT . EQUALS expression IN expression  (12)
+
+	EQUALS  shift 45
+	.  error
+
+
+state 40
+	not_pm : atomic_expression EXP . not_pm  (10)
+
+	FLOAT  shift 3
+	IDENT  shift 4
+	LET  shift 29
+	LBRAC  shift 6
+	LPAREN  shift 7
+	.  error
+
+	not_pm  goto 46
+	atomic_expression  goto 31
+	not_pme  goto 32
+
+
+state 41
+	main : LET IDENT EQUALS expression DSEMI .  (2)
+
+	.  reduce 2
+
+
+state 42
+	expression : LET IDENT EQUALS expression IN . expression  (4)
+
+	FLOAT  shift 3
+	IDENT  shift 4
+	LET  shift 14
+	LBRAC  shift 6
+	LPAREN  shift 7
+	.  error
+
+	expression  goto 47
+	not_let  goto 10
+	atomic_expression  goto 11
+
+
+state 43
+	main : LET REC IDENT IDENT EQUALS . expression DSEMI  (3)
+
+	FLOAT  shift 3
+	IDENT  shift 4
+	LET  shift 14
+	LBRAC  shift 6
+	LPAREN  shift 7
+	.  error
+
+	expression  goto 48
+	not_let  goto 10
+	atomic_expression  goto 11
+
+
+state 44
+	expression : LET IDENT EQUALS expression . IN expression  (4)
+
+	IN  shift 42
+	.  error
+
+
+state 45
+	not_pme : LET IDENT EQUALS . expression IN expression  (12)
+
+	FLOAT  shift 3
+	IDENT  shift 4
+	LET  shift 14
+	LBRAC  shift 6
+	LPAREN  shift 7
+	.  error
+
+	expression  goto 49
+	not_let  goto 10
+	atomic_expression  goto 11
+
+
+state 46
+	not_pm : atomic_expression EXP not_pm .  (10)
+
+	.  reduce 10
+
+
+state 47
+	expression : LET IDENT EQUALS expression IN expression .  (4)
+
+	.  reduce 4
+
+
+state 48
+	main : LET REC IDENT IDENT EQUALS expression . DSEMI  (3)
+
+	DSEMI  shift 50
+	.  error
+
+
+state 49
+	not_pme : LET IDENT EQUALS expression . IN expression  (12)
+
+	IN  shift 51
+	.  error
+
+
+state 50
+	main : LET REC IDENT IDENT EQUALS expression DSEMI .  (3)
+
+	.  reduce 3
+
+
+state 51
+	not_pme : LET IDENT EQUALS expression IN . expression  (12)
+
+	FLOAT  shift 3
+	IDENT  shift 4
+	LET  shift 14
+	LBRAC  shift 6
+	LPAREN  shift 7
+	.  error
+
+	expression  goto 52
+	not_let  goto 10
+	atomic_expression  goto 11
+
+
+state 52
+	not_pme : LET IDENT EQUALS expression IN expression .  (12)
+
+	.  reduce 12
+
+
+Rules never reduced:
+	pat : UNDERSCORE  (21)
+	pat : INT  (22)
+
+
+State 10 contains 2 shift/reduce conflicts.
+
+
+60 terminals, 10 nonterminals
+24 grammar rules, 53 states
+Error count: 1
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+/* Use the expression datatype defined in expressions.ml: */
+%{
+  open Common
+
+(* You may want to add extra code here *)
+
+%}
+
+
+/* Define the tokens of the language: */
+%token <int> INT
+%token <float> FLOAT
+%token <string> STRING IDENT
+%token TRUE FALSE NEG PLUS MINUS TIMES DIV DPLUS DMINUS DTIMES DDIV MOD EXP CARAT
+       LT GT LEQ GEQ EQUALS NEQ PIPE ARROW SEMI DSEMI DCOLON NIL
+       LET REC AND IN IF THEN ELSE FUN MOD RAISE TRY WITH NOT LOGICALAND
+       LOGICALOR LBRAC RBRAC LPAREN RPAREN COMMA UNDERSCORE UNIT
+       HEAD TAIL PRINT FST SND EOF
+
+/* Define the "goal" nonterminal of the grammar: */
+%start main
+%type <Common.dec> main
+
+%%
+
+
+
+main:
+    expression DSEMI      			   { (Anon ( $1)) }
+  | LET IDENT EQUALS expression	DSEMI 	           { (Let ($2,$4)) }
+  | LET REC IDENT IDENT EQUALS expression DSEMI    { (LetRec ($3, $4, $6)) }
+
+expression: 
+
+/* You will need to change stuff here, we just have a minimal version so that
+   you can successfully do make initially  */
+
+  LET IDENT EQUALS expression IN expression {LetInExp($2, $4, $6)}
+  | not_let {$1}
+
+not_let:
+    not_let DPLUS not_pm {BinOpAppExp(FloatPlusOp, $1, $3)}
+    | not_let DMINUS not_pm {BinOpAppExp(FloatMinusOp, $1, $3)}
+    | atomic_expression EXP not_pm {BinOpAppExp(ExpoOp, $1, $3)}
+    | atomic_expression {$1}
+
+not_pm:
+    atomic_expression EXP not_pm {BinOpAppExp(ExpoOp, $1, $3)}
+    | not_pme {$1}
+
+not_pme:
+    LET IDENT EQUALS expression IN expression {LetInExp($2, $4, $6)}
+    | atomic_expression {$1}
+
+list_exp:
+    expression {BinOpAppExp(ConsOp, $1, ConstExp(NilConst))}
+    | expression SEMI list_exp {BinOpAppExp(ConsOp, $1, $3)}
+
+atomic_expression: /* You may want to change this */
+  | IDENT			{ VarExp $1 }
+  | FLOAT {ConstExp(FloatConst $1)}
+  | LPAREN expression RPAREN {$2}
+  | LBRAC RBRAC {ConstExp(NilConst)}
+  | LBRAC list_exp RBRAC {$2}
+  
+  
+/* For the second extra credit, if you want to try it */
+
+pat:
+  | UNDERSCORE	{ None }
+  | INT		{ Some $1 }
+------------------------------------------------------
+
+Stdout
+----------------------------------------------------
+
+

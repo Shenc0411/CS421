@@ -1,0 +1,49 @@
+
+mp2xc grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [6 / 6]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 6
+
+Functional_Programming-continuationPassingStyle_higherOrderFun-code_ocaml_autograded-list_compose/grader program output
+---------------------
+
+
+[1 / 1] list_compose [(fun x -> x * x) ; (fun x -> x + 2)] (correct)
+[1 / 1] list_composek [(fun x -> mulk(x,x)) ; (fun x -> addk(x,2))] string_of_int (correct)
+[0 / 0] list_composek [(fun x -> mulk(x,x)) ; (fun x -> addk(x,2))] (fun s -> ()) (correct)
+[0 / 0] list_composek [] (fun s -> (idk s; ())) (correct)
+[2 / 2] is_cps_check file "list_composek" (correct)
+[2 / 2] is_cps_of_check file "list_compose" "list_composek" (correct)
+
+Total: [6 / 6]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common (* Please leave this. *)(* Put code for list_compose and list_composek here. *)
+let rec list_compose fs =
+    match fs with [] -> 0
+    | x::xs -> 
+        let result = list_compose xs in
+            x result;;
+
+let rec list_composek fsk k = 
+    match fsk with [] -> k 0
+    | x::xs ->
+        list_composek xs (fun t0 ->
+            x t0 k);;
+Stdout
+----------------------------------------------------
+
+

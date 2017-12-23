@@ -1,0 +1,47 @@
+
+mp2 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [5 / 5]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 5
+
+Functional_Programming-continuations_basic-code_ocaml_autograded-shift/grader program output
+---------------------
+
+
+[1 / 1] shiftk ("--", 3.14) (fun s -> (s , String.length s)) (correct)
+[0 / 0] shiftk ("--", 3.14) (fun s -> (s, String.length s)) (correct)
+[0 / 0] shiftk ("--", 3.14) (fun s -> (grab_trace s;s,0)) (correct)
+[1 / 1] shiftk ("", 17.0) (fun s -> (grab_trace s, String.length s)) (correct)
+[1 / 1] shiftk ("<<", 2.2) (fun s -> (grab_trace s , String.length s)) (correct)
+[2 / 2] is_cps_check file "shiftk" (correct)
+
+Total: [5 / 5]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common (* Please leave this. *)
+(* Put code for shiftk here. *)
+let shiftk (s, q) k =
+    float_addk (q, 1.57) (fun t0 ->
+    float_mulk (t0, t0) (fun t1 ->
+    truncatek t1 (fun t2 ->
+    string_of_intk t2 (fun t3 ->
+    concatk (s, t3) (fun t4 -> 
+    concatk (t4, s) k
+    )))));;
+Stdout
+----------------------------------------------------
+
+

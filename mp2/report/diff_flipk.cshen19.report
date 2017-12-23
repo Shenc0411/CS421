@@ -1,0 +1,44 @@
+
+mp2 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [5 / 5]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 5
+
+Functional_Programming-continuations_basic-code_ocaml_autograded-diff_flipk/grader program output
+---------------------
+
+
+Result: 0
+Result: 0
+[1 / 1] diff_flipk 1 report_int (correct)
+[1 / 1] diff_flipk 0 idk (correct)
+[0 / 0] diff_flipk (-3) (fun s -> (grab_trace s;())) (correct)
+[1 / 1] diff_flipk (-3) grab_trace (correct)
+[2 / 2] is_cps_check file "diff_flipk" (correct)
+
+Total: [5 / 5]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+(* Put code for diff_flipk here. *)
+open Common
+let diff_flipk p k = 
+    subk (1, p) (fun t1 -> mulk (t1, p) (fun t2 -> mulk (2, t2) k));;
+Stdout
+----------------------------------------------------
+
+Result: 0
+Result: 0
+

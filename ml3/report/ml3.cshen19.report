@@ -1,0 +1,16 @@
+ml3 report for cshen19:
+
+                                                            SCORE     OUT OF
+Basic Operations with ADTs
+   count_const_in_exp                                           4         4
+CPS Transformation, Base Cases
+   cpsExp_const                                                 2         2
+CPS Transformation, Recursive Cases
+   cpsExp_if_else                                               3         3
+Free Variables in Expressions, Base Cases
+   freeVars_var                                                 1         1
+Free Variables in Expressions, Recursive Cases, no Binders
+   freeVars_binOp                                               2         2
+Free Variables in Expressions, Recursive Cases, with Binders
+   freeVars_letrec                                              3         3
+Total:                                                       15        15

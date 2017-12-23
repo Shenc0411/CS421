@@ -1,0 +1,90 @@
+open Common
+let rubric_version = "1.0"
+let rubric_title = "CS421 Fall 2016 ML3"
+
+(**************************************************************************
+ * You can add new test cases by adding new elements to the following lists
+ * Format is:
+ * TEST<X>ARG(<weight>, <function_name>, <arg1>, <arg2>, ..., <argX>)
+ *
+ * <X> is the number of argument that the function being tested takes.
+ **************************************************************************)
+
+let infer_exp tree =
+ Common.canon (Common.infer_exp Solution.gather_exp_ty_substitution [] tree);;
+let infer_exp_stu tree =
+ Common.canon (Common.infer_exp Student.gather_exp_ty_substitution  [] tree);;
+
+let infer2_exp gamma tree =
+    Common.canon
+    (Common.infer_exp Solution.gather_exp_ty_substitution gamma tree);;
+let infer2_exp_stu gamma tree =
+    Common.canon
+    (Common.infer_exp Student.gather_exp_ty_substitution  gamma tree);;
+
+(* environment *)
+let env0 = [];;
+let env1 = make_env "f" ([0], mk_fun_ty bool_ty (TyVar 0));;
+
+(* simple expressions *)
+let con_exp1 = ConstExp(BoolConst true);;
+let var_exp1 = VarExp "f";;
+let bin_exp1 = BinOpAppExp(ConsOp, ConstExp (IntConst 62), ConstExp NilConst);;
+let mon_exp1 = MonOpAppExp(IntNegOp, ConstExp(IntConst 42));;
+let if_exp1 = IfExp(ConstExp(BoolConst true),
+                    ConstExp(IntConst 62), ConstExp(IntConst 252));;
+let fun_exp1 = FunExp("x", BinOpAppExp(IntPlusOp, VarExp "x", VarExp "x"));;
+let app_exp1 = AppExp(FunExp("x", BinOpAppExp(IntPlusOp, VarExp "x", VarExp "x")),
+          ConstExp(IntConst 62));;
+let raise_exp1 = RaiseExp(IfExp(ConstExp(BoolConst true), ConstExp(IntConst 62),
+                  ConstExp(IntConst 252)));;
+let letin_exp1 = LetInExp("x", ConstExp (IntConst 7), 
+                                    BinOpAppExp(IntPlusOp, VarExp "x", VarExp "x"));;                  
+let letrecin_exp1 = LetRecInExp("length", "list",
+                    IfExp(BinOpAppExp(EqOp, VarExp "list", ConstExp NilConst),
+                          ConstExp (IntConst 0),
+                          BinOpAppExp(IntPlusOp, ConstExp (IntConst 1),
+                                     (AppExp(VarExp "length",
+                                              MonOpAppExp(TlOp,VarExp "list"))))),
+                    AppExp(VarExp "length", 
+                           BinOpAppExp(ConsOp, 
+                                        ConstExp (IntConst 2),
+                                        ConstExp NilConst)));;
+                                        
+let trywith_exp1 =
+    TryWithExp(BinOpAppExp(ConcatOp, ConstExp(StringConst "What"),
+                          RaiseExp(ConstExp(IntConst 3))),
+              Some 0, ConstExp(StringConst " do you mean?"),
+              [(None, ConstExp(StringConst " the heck?")) ]);;
+
+(* This list is for regular problems *)
+let rubric =
+[
+	TEST2ARG_TWOFUN(0, infer2_exp, infer2_exp_stu, env0, con_exp1);
+
+	TEST2ARG_TWOFUN(1, infer2_exp, infer2_exp_stu, env1, var_exp1);
+
+	TEST2ARG_TWOFUN(1, infer2_exp, infer2_exp_stu, env0, bin_exp1);
+
+	TEST2ARG_TWOFUN(1, infer2_exp, infer2_exp_stu, env0, mon_exp1);
+
+	TEST2ARG_TWOFUN(1, infer2_exp, infer2_exp_stu, env0, if_exp1);
+
+	TEST2ARG_TWOFUN(2, infer2_exp, infer2_exp_stu, env0, fun_exp1);
+
+	TEST2ARG_TWOFUN(1, infer2_exp, infer2_exp_stu, env0, app_exp1);
+
+	TEST2ARG_TWOFUN(1, infer2_exp, infer2_exp_stu, env0, raise_exp1);
+  
+  TEST2ARG_TWOFUN(1, infer2_exp, infer2_exp_stu, env0, letin_exp1);
+  
+  TEST2ARG_TWOFUN(1, infer2_exp, infer2_exp_stu, env0, letrecin_exp1);
+
+
+]
+
+(* This list is for extra credit problems *)
+let extra_rubric = [
+	TEST2ARG_TWOFUN(1, infer2_exp, infer2_exp_stu, env0, trywith_exp1);
+]
+

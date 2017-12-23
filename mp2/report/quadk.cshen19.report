@@ -1,0 +1,50 @@
+
+mp2 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [5 / 5]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 5
+
+Functional_Programming-continuations_basic-code_ocaml_autograded-quadk/grader program output
+---------------------
+
+
+Result: 7
+Result: 7
+[1 / 1] quadk (1, 1, 1) report_int (correct)
+[0 / 0] quadk (1, 1, 1) (fun s -> ()) (correct)
+[0 / 0] quadk (1, 1, 1) (fun s -> (grab_trace s;())) (correct)
+[1 / 1] quadk (11, 0, (-2)) grab_trace (correct)
+[1 / 1] quadk (2, 1, 0) (fun s -> grab_trace (string_of_int s)) (correct)
+[2 / 2] is_cps_check file "quadk" (correct)
+
+Total: [5 / 5]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+open Common (* Leave this line here! *)
+  (* Put code for quadk here. *)
+let quadk (a, b, c) k =
+    mulk (4, b) (fun t1 -> 
+    mulk (a, a) (fun t2 -> 
+    mulk (2, t2) (fun t3 -> 
+    addk (t3, t1) (fun t4 -> 
+    addk (t4, c) k
+    ))));;
+Stdout
+----------------------------------------------------
+
+Result: 7
+Result: 7
+

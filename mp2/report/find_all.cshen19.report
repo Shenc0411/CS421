@@ -1,0 +1,59 @@
+
+mp2 grade report for cshen19
+================================
+
+*Regular Problems:
+Grading script score  => [12 / 12]
+Late Penalty          => 0
+Point adjustments     =>
+Total                 => 12
+
+Functional_Programming-continuationPassingStyle_higherOrderFun-code_ocaml_autograded-find_all/grader program output
+---------------------
+
+
+[1 / 1] find_all ((fun x -> x mod 2 = 0), [-3; 5; 2; -6]) (correct)
+[1 / 1] find_all ((fun x -> true), [""; "aa"; "a"; "1"; "::"]) (correct)
+[0 / 0] find_allk ((fun x -> fun k -> k true), [()]) (fun s -> ()) (correct)
+[0 / 0] find_allk ((fun x -> fun k -> k true), [()]) (fun s -> idk(s);()) (correct)
+[1 / 1] find_allk ((fun x -> fun k -> modk (x, 2) (fun n -> eqk (n, 0) k)), [-3; 5; 2; -6]) (fun s -> (idk(List.map string_of_int s))) (correct)
+[1 / 1] find_allk ((fun x -> fun k -> k true), [""; "aa"; "a"; "1"; "::"]) (fun s -> (idk(List.length s))) (correct)
+[1 / 1] find_allk ((fun x -> fun k -> gtk (x, 7) k), [32; 2; 13; 5]) (fun s -> (idk s)) (correct)
+[1 / 1] find_allk ((fun x -> fun k -> k false), [3.5; 4.8]) (fun s -> (idk s)) (correct)
+[1 / 1] find_allk ((fun x -> fun k -> k true), []) (fun s -> (idk s)) (correct)
+[1 / 1] find_allk ((fun x -> fun k -> k false), []) (fun s -> (idk s)) (correct)
+[2 / 2] is_cps_check file "find_allk" (correct)
+[2 / 2] is_cps_of_check file "find_all" "find_allk" (correct)
+
+Total: [12 / 12]
+Extra: [0 / 0]
+
+Additional output from compiling students code (may be empty)
+----------------------------------------------------
+
+
+
+Student's code (with comments and point adjustments)
+----------------------------------------------------
+
+
+ open Common (* Leave this line here! *) 
+ (*Put code for find_all and find_allk here. *)
+let rec find_all (p, l) =
+    match l with [] -> []
+    | x::xs ->
+        let result = find_all (p, xs) in
+            if p x then (x::result)
+            else result;;
+
+let rec find_allk (p, l) k = 
+    match l with [] -> k []
+    | x::xs -> 
+        find_allk (p, xs) (fun t0 ->
+            p x (fun t1 ->
+            if t1 then consk (x, t0) k
+            else k t0));;
+Stdout
+----------------------------------------------------
+
+

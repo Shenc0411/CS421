@@ -1,0 +1,8 @@
+ml4 report for cshen19:
+
+                                                            SCORE     OUT OF
+Substitution, Occurs
+   subst_fun                                                    6         6
+Unification Steps
+   unify_eliminate                                             35        35
+Total:                                                       41        41
